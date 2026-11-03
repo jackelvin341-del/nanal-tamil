@@ -1,0 +1,486 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="தமிழின் பெருமை, வரலாறு, இலக்கியம் மற்றும் பண்பாட்டை உலகத்துடன் இணைக்கும் முயற்சி.">
+  <title>தமிழால் இணைவோம் | Unite Through Tamil</title>
+
+  <style>
+    :root {
+      --green: #176b45;
+      --green-dark: #104b32;
+      --gold: #d6a84f;
+      --cream: #fffaf0;
+      --ink: #24352c;
+      --muted: #66756c;
+      --shadow: 0 12px 35px rgba(22, 65, 43, .10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Noto Sans Tamil", "Latha", "Arial", sans-serif;
+      background-color: var(--cream);
+      background-image:
+        linear-gradient(rgba(255,250,240,0.25), rgba(255,250,240,0.25)),
+        url("tamilal-inaivom-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .topbar {
+      background: var(--green-dark);
+      color: #fff;
+      text-align: center;
+      padding: 7px 14px;
+      font-size: .9rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,250,240,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e9e1d2;
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand { color: var(--green-dark); font-weight: 900; font-size: 1.25rem; }
+    .brand span { color: var(--gold); }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 17px; font-size: .94rem; font-weight: 700; }
+    .nav-links a:hover { color: var(--green); }
+
+    .hero {
+      color: white;
+      text-align: center;
+      padding: 92px 20px 86px;
+      background:
+        linear-gradient(120deg, rgba(8,49,31,.88), rgba(23,107,69,.76)),
+        url("tamilal-inaivom-bg.png") center/cover no-repeat;
+    }
+
+    .hero-inner { max-width: 850px; margin: auto; }
+    .eyebrow { color: #f3d58f; letter-spacing: 2px; font-weight: 800; font-size: .88rem; }
+    h1 { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.25; margin: 15px 0; }
+    .hero p { max-width: 700px; margin: 0 auto 25px; color: #f2f7f2; font-size: 1.08rem; }
+
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: 30px;
+      padding: 11px 22px;
+      background: var(--gold);
+      color: #172b20;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); opacity: .92; }
+    .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,.7); margin-left: 8px; }
+
+    .container { max-width: 1120px; margin: auto; padding: 68px 22px; }
+    .section-head { text-align: center; margin-bottom: 32px; }
+    .section-head h2 { color: var(--green-dark); font-size: clamp(1.65rem, 4vw, 2.35rem); }
+    .section-head p { color: var(--muted); margin-top: 6px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      background: rgba(255,255,255,.94);
+      border: 1px solid #eee6d8;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card .symbol { font-size: 2rem; }
+    .card h3 { color: var(--green); margin: 8px 0; }
+    .card p { color: var(--muted); }
+    .soft { background: rgba(243,245,235,.94); }
+
+    .quote {
+      max-width: 850px;
+      margin: auto;
+      text-align: center;
+      padding: 32px;
+      border-left: 5px solid var(--gold);
+      background: rgba(255,255,255,.95);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    .quote .kural { color: var(--green-dark); font-size: 1.3rem; font-weight: 800; }
+    .quote small { color: var(--muted); }
+
+    .voice-panel {
+      max-width: 850px;
+      margin: 25px auto 0;
+      background: rgba(255,255,255,.95);
+      border: 1px solid #e9e1d2;
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .voice-panel h3 { color: var(--green-dark); margin-bottom: 8px; }
+    .voice-panel audio { width: min(100%, 520px); margin: 15px 0 5px; }
+    .small { color: var(--muted); font-size: .88rem; }
+
+    .search-box { max-width: 720px; margin: auto; display: flex; gap: 10px; }
+    .search-box input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px 16px;
+      border: 1px solid #d9dfd6;
+      border-radius: 12px;
+      outline: none;
+      background: white;
+    }
+    .search-box input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(23,107,69,.1); }
+    .search-results { text-align: center; margin-top: 17px; color: var(--muted); }
+
+    .join-box {
+      background: var(--green-dark);
+      color: white;
+      text-align: center;
+      border-radius: 22px;
+      padding: 38px 24px;
+    }
+    .join-box h2 { font-size: 2rem; margin-bottom: 8px; }
+    .join-box p { color: #e1eee5; margin-bottom: 20px; }
+
+    footer { background: #0c3826; color: #dce9df; text-align: center; padding: 24px 15px; font-size: .9rem; }
+
+    /* Tamil Heritage Gallery */
+    .heritage-section {
+      padding: 65px 7%;
+      background: rgba(245,243,232,.94);
+      text-align: center;
+    }
+    .heritage-section h2 { color: #176b3a; font-size: 32px; margin-bottom: 10px; }
+    .heritage-intro { color: #626b5e; margin-bottom: 35px; }
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      max-width: 1120px;
+      margin: auto;
+    }
+    .heritage-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.09);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .heritage-card:hover { transform: translateY(-7px); }
+    .heritage-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+    .heritage-card h3 { color: #176b3a; padding: 14px 8px 5px; margin: 0; }
+    .heritage-card p { color: #666; padding: 0 14px 18px; font-size: 14px; line-height: 1.6; }
+
+    .heritage-popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .heritage-popup-content {
+      background: #fffdf3;
+      max-width: 500px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+    .heritage-popup-content img { width: 100%; max-height: 280px; object-fit: cover; border-radius: 12px; }
+    .heritage-popup-content h2 { color: #176b3a; }
+    .heritage-close {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      border: none;
+      background: #176b3a;
+      color: white;
+      border-radius: 50%;
+      padding: 7px 11px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 760px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 10px 15px; }
+      .cards { grid-template-columns: 1fr; }
+      .hero { padding: 70px 18px; }
+      .search-box { flex-direction: column; }
+      .btn-outline { margin: 10px 0 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">தமிழ் மொழி • தமிழ் பண்பாடு • தமிழ் மக்கள்</div>
+
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#home">தமிழால் <span>இணைவோம்</span></a>
+      <div class="nav-links">
+        <a href="#home">முகப்பு</a>
+        <a href="#about">எங்களைப் பற்றி</a>
+        <a href="#learn">தமிழைக் கற்போம்</a>
+        <a href="#pride">தமிழின் பெருமை</a>
+        <a href="#tamil-heritage">பாரம்பரியம்</a>
+        <a href="#projects">திட்டங்கள்</a>
+        <a href="#join">இணையுங்கள்</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="eyebrow">UNITE THROUGH TAMIL</div>
+        <h1>தமிழால் உலகை இணைப்போம்!</h1>
+        <p>நம் மொழி, நம் அடையாளம். தமிழ் இலக்கியம், வரலாறு, கலை மற்றும் பண்பாட்டை அடுத்த தலைமுறைக்கும் உலகெங்கும் வாழும் தமிழர்களுக்கும் கொண்டு செல்வோம்.</p>
+        <a class="btn" href="#about">எங்கள் பயணத்தை அறியுங்கள்</a>
+        <a class="btn btn-outline" href="#pride">தமிழின் குரலைக் கேளுங்கள்</a>
+      </div>
+    </section>
+
+    <section class="container" id="about">
+      <div class="section-head">
+        <h2>எங்களைப் பற்றி</h2>
+        <p>தமிழை நேசிப்போம்; அறிவைப் பகிர்வோம்; ஒன்றிணைவோம்.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="symbol">📜</div>
+          <h3>மொழியின் மரபு</h3>
+          <p>தமிழ் இலக்கியங்கள், பழமையான நூல்கள் மற்றும் மொழியின் வளர்ச்சியை எளிய முறையில் அறிமுகப்படுத்துதல்.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">🌏</div>
+          <h3>உலகத் தமிழர் இணைப்பு</h3>
+          <p>வெவ்வேறு நாடுகளிலும் வாழும் தமிழ் மக்களின் அனுபவங்களையும் படைப்புகளையும் பகிரும் மேடை.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">💡</div>
+          <h3>அடுத்த தலைமுறை</h3>
+          <p>குழந்தைகள் மற்றும் இளைஞர்களிடம் தமிழ் வாசிப்பு, எழுத்து, படைப்பாற்றல் ஆகியவற்றை ஊக்குவித்தல்.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container soft" id="learn">
+      <div class="section-head">
+        <h2>தமிழைக் கற்போம்</h2>
+        <p>சிறிய முயற்சியில் தொடங்கி, தமிழை தினமும் பயன்படுத்துவோம்.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="symbol">அ</div>
+          <h3>எழுத்துகள்</h3>
+          <p>உயிரெழுத்து, மெய்யெழுத்து, உயிர்மெய்யெழுத்துகளைப் படித்து எழுதிப் பழகுங்கள்.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">📖</div>
+          <h3>இலக்கியம்</h3>
+          <p>திருக்குறள், சங்க இலக்கியம் மற்றும் தமிழ் படைப்புகளைப் பற்றி அறிந்துகொள்ளுங்கள்.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">✍️</div>
+          <h3>எழுதிப் பழகுங்கள்</h3>
+          <p>தினமும் சில தமிழ் சொற்களையும் வாக்கியங்களையும் எழுதிப் பாருங்கள்.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" id="pride">
+      <div class="section-head">
+        <h2>தமிழின் பெருமை</h2>
+        <p>மொழியை அறிதல் என்பது நம் மரபையும் சிந்தனையையும் அறிதல்.</p>
+      </div>
+      <div class="quote">
+        <div class="kural">அகர முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.</div>
+        <small>திருக்குறள் — கடவுள் வாழ்த்து, குறள் 1</small>
+        <p style="margin-top:12px;">கல்விக்கும் அறிவுக்கும் அடித்தளமாக விளங்கும் திருவள்ளுவரின் சிந்தனையை நினைவுகூர்வோம்.</p>
+      </div>
+      <div class="voice-panel">
+        <h3>🎙️ தமிழின் குரல்</h3>
+        <p id="prideNarration">தமிழ்! வெறும் மொழியல்ல... இது நம் அடையாளம்! நம் பண்பாடு! நம் வரலாறு! தலைமுறைகள் கடந்து வாழும் நம் பெருமை! உலகின் எந்த மூலையில் இருந்தாலும், தமிழால் நாம் ஒன்றிணைவோம்! தமிழைக் கற்போம்! தமிழைப் பேசுவோம்! தமிழில் படைப்போம்! தமிழால் உலகை இணைப்போம்! தமிழ் வாழ்க! தமிழர் பெருமை ஓங்குக!</p>
+        <audio id="tamilAudio" controls preload="metadata">
+          <source src="tamil-pride.mp3" type="audio/mpeg">
+          உங்கள் உலாவியில் audio player ஆதரிக்கப்படவில்லை.
+        </audio>
+        <p class="small">tamil-pride.mp3 கோப்பை இந்த index.html கோப்பு இருக்கும் அதே இடத்தில் வைக்கவும்.</p>
+      </div>
+    </section>
+
+    <section class="heritage-section" id="tamil-heritage">
+      <h2>🌿 தமிழர் பண்பாட்டுக் களஞ்சியம்</h2>
+      <p class="heritage-intro">
+        Discover the traditional games, dances, music and arts of Tamil people.
+        <br>நம் பாரம்பரியத்தை அறிந்து பெருமை கொள்வோம்!
+      </p>
+      <div class="heritage-grid">
+        <div class="heritage-card">
+          <img src="pallanguzhi.jpg" alt="Pallanguzhi">
+          <h3>பல்லாங்குழி</h3>
+          <p>A traditional Tamil indoor board game.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="silambam.jpg" alt="Silambam">
+          <h3>சிலம்பம்</h3>
+          <p>An ancient Tamil martial art.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="kabaddi.jpg" alt="Kabaddi">
+          <h3>கபடி</h3>
+          <p>A traditional team sport popular in Tamil villages.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="bharatanatyam.jpg" alt="Bharatanatyam">
+          <h3>பரதநாட்டியம்</h3>
+          <p>A classical dance form with a rich Tamil tradition.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="karagattam.jpg" alt="Karagattam">
+          <h3>கரகாட்டம்</h3>
+          <p>A traditional Tamil folk dance.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="oyilattam.jpg" alt="Oyilattam">
+          <h3>ஒயிலாட்டம்</h3>
+          <p>A colourful traditional folk dance.</p>
+        </div>
+        <div class="heritage-card">
+          <img src="therukoothu.jpg" alt="Therukoothu">
+          <h3>தெருக்கூத்து</h3>
+          <p>A traditional Tamil street theatre art.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container soft" id="projects">
+      <div class="section-head">
+        <h2>தமிழ் அறிவுத் தேடல்</h2>
+        <p>ஒரு தலைப்பைத் தேடி, மேலும் படிக்கத் தொடங்குங்கள்.</p>
+      </div>
+      <div class="search-box">
+        <input id="prideSearch" type="search" placeholder="உதாரணம்: திருக்குறள், சங்க இலக்கியம், தமிழ் வரலாறு">
+        <button class="btn" id="searchBtn" type="button">தேடுக</button>
+      </div>
+      <div class="search-results" id="searchResults" aria-live="polite">தேட வேண்டிய தலைப்பை உள்ளிடுங்கள்.</div>
+    </section>
+
+    <section class="container" id="join">
+      <div class="join-box">
+        <h2>தமிழால் இணைவோம்!</h2>
+        <p>தமிழை நேசிக்கும் ஒவ்வொருவரின் சிறிய பங்களிப்பும் பெரிய மாற்றத்தை உருவாக்கும்.</p>
+        <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSc_QihNMIgonowXdG1yXjGZxAX3tuSFX8b9Cy0kkP8ZWtcc8g/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">எங்களுடன் இணையுங்கள்</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 தமிழால் இணைவோம் | Unite Through Tamil</p>
+    <p>தமிழ் வாழ்க! உலகத் தமிழர் ஒன்றிணைவோம்!</p>
+    <p>உருவாக்கியவர்: Jac Kelvin மற்றும் குழுவினர்</p>
+  </footer>
+
+  <div class="heritage-popup" id="heritagePopup">
+    <div class="heritage-popup-content">
+      <button class="heritage-close" onclick="closeHeritage()" aria-label="Close">✕</button>
+      <img id="popupImage" src="" alt="">
+      <h2 id="popupTitle"></h2>
+      <p id="popupDescription"></p>
+    </div>
+  </div>
+
+  <script>
+    const heritageInfo = {
+      "பல்லாங்குழி": "பாரம்பரியமாக மரப்பலகையில் குழிகள் அமைத்து விளையாடப்படும் தமிழர் விளையாட்டு.",
+      "சிலம்பம்": "மூங்கில் கம்பைப் பயன்படுத்தும் பாரம்பரியத் தமிழ் தற்காப்புக் கலை.",
+      "கபடி": "குழுவாக விளையாடப்படும் பாரம்பரியமான விளையாட்டு.",
+      "பரதநாட்டியம்": "அபிநயம், இசை மற்றும் தாளம் இணைந்த செம்மையான பாரம்பரிய நடனக்கலை.",
+      "கரகாட்டம்": "தலையில் கரகம் ஏந்தி ஆடும் தமிழர் நாட்டுப்புற நடனம்.",
+      "ஒயிலாட்டம்": "இசைக்கேற்ப குழுவாக அசைவுகளுடன் ஆடப்படும் நாட்டுப்புற நடனம்.",
+      "தெருக்கூத்து": "திறந்தவெளியில் பாடல், நடிப்பு, இசையுடன் நிகழ்த்தப்படும் தமிழர் நாடகக்கலை."
+    };
+
+    document.querySelectorAll(".heritage-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const image = card.querySelector("img");
+        const title = card.querySelector("h3").textContent.trim();
+        document.getElementById("popupImage").src = image.src;
+        document.getElementById("popupImage").alt = title;
+        document.getElementById("popupTitle").textContent = title;
+        document.getElementById("popupDescription").textContent =
+          heritageInfo[title] || "Explore this beautiful Tamil tradition.";
+        document.getElementById("heritagePopup").style.display = "flex";
+      });
+    });
+
+    function closeHeritage() {
+      document.getElementById("heritagePopup").style.display = "none";
+    }
+
+    document.getElementById("heritagePopup").addEventListener("click", event => {
+      if (event.target.id === "heritagePopup") closeHeritage();
+    });
+
+    function doSearch() {
+      const input = document.getElementById("prideSearch");
+      const results = document.getElementById("searchResults");
+      const query = input.value.trim();
+
+      if (!query) {
+        results.textContent = "தயவுசெய்து ஒரு தலைப்பை உள்ளிடுங்கள்.";
+        input.focus();
+        return;
+      }
+
+      const encoded = encodeURIComponent(query);
+      results.innerHTML =
+        'இதற்கான தேடல் இணைப்புகள்: ' +
+        '<a href="https://www.google.com/search?q=' + encoded + '" target="_blank" rel="noopener noreferrer">Google-ல் தேடுங்கள்</a>' +
+        ' | ' +
+        '<a href="https://ta.wikipedia.org/w/index.php?search=' + encoded + '" target="_blank" rel="noopener noreferrer">தமிழ் விக்கிப்பீடியாவில் தேடுங்கள்</a>';
+    }
+
+    document.getElementById("searchBtn").addEventListener("click", doSearch);
+    document.getElementById("prideSearch").addEventListener("keydown", event => {
+      if (event.key === "Enter") doSearch();
+    });
+  </script>
+</body>
+</html>
+'''
+
+out = Path("/mnt/data/tamilal_inaivom_github_ready.html")
+out.write_text(html, encoding="utf-8")
+print(f"Created {out.name} ({len(html):,} characters)")
