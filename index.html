@@ -1,6 +1,5 @@
-from pathlib import Path
 
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
   <meta charset="UTF-8">
@@ -170,7 +169,6 @@ html = r'''<!DOCTYPE html>
 
     footer { background: #0c3826; color: #dce9df; text-align: center; padding: 24px 15px; font-size: .9rem; }
 
-    /* Tamil Heritage Gallery */
     .heritage-section {
       padding: 65px 7%;
       background: rgba(245,243,232,.94);
@@ -479,8 +477,3 @@ html = r'''<!DOCTYPE html>
   </script>
 </body>
 </html>
-'''
-
-out = Path("/mnt/data/tamilal_inaivom_github_ready.html")
-out.write_text(html, encoding="utf-8")
-print(f"Created {out.name} ({len(html):,} characters)")
