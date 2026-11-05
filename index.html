@@ -379,6 +379,158 @@
       </div>
     </section>
 
+    
+<!-- DAILY THIRUKKURAL -->
+<section class="daily-kural" id="daily-kural">
+  <div class="kural-heading">
+    <span>📜 தினம் ஒரு திருக்குறள்</span>
+    <h2>இன்றைய குறள்</h2>
+    <p id="kural-date"></p>
+  </div>
+
+  <div class="kural-card">
+    <div class="kural-number" id="kural-number">
+      குறள் எண்: ஏற்றப்படுகிறது...
+    </div>
+
+    <h3 id="kural-chapter">திருவள்ளுவர் அருளிய திருக்குறள்</h3>
+
+    <div class="kural-text" id="kural-text">
+      குறள் ஏற்றப்படுகிறது...
+    </div>
+
+    <div class="kural-meaning">
+      <h4>💡 பொருள்</h4>
+      <p id="kural-meaning">பொருள் ஏற்றப்படுகிறது...</p>
+    </div>
+
+    <p class="kural-paal" id="kural-paal"></p>
+
+    <button onclick="loadDailyKural()" class="kural-refresh">
+      🔄 இன்றைய குறளை மீண்டும் ஏற்று
+    </button>
+  </div>
+
+  <p class="kural-credit">
+    திருவள்ளுவரின் திருக்குறள் – 1330 குறள்களின் தொகுப்பு
+  </p>
+</section>
+
+<style>
+.daily-kural {
+  max-width: 900px;
+  margin: 45px auto;
+  padding: 25px 18px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.kural-heading span {
+  color: #c69b32;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.kural-heading h2 {
+  color: #075b36;
+  font-size: 30px;
+  margin: 12px 0;
+}
+
+.kural-heading p {
+  color: #777;
+}
+
+.kural-card {
+  background: linear-gradient(135deg, #fffdf4, #f0f8ed);
+  border: 2px solid #c69b32;
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.kural-number {
+  color: #087442;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.kural-card h3 {
+  color: #075b36;
+  font-size: 21px;
+}
+
+.kural-text {
+  color: #173e2a;
+  font-size: 23px;
+  line-height: 2;
+  font-weight: bold;
+  margin: 25px 0;
+  white-space: pre-line;
+}
+
+.kural-meaning {
+  background: rgba(255,255,255,0.8);
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.kural-meaning h4 {
+  color: #a07816;
+  font-size: 19px;
+}
+
+.kural-meaning p {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.kural-paal {
+  color: #087442;
+  font-weight: bold;
+  margin-top: 18px;
+}
+
+.kural-refresh {
+  background: #087442;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.kural-refresh:hover {
+  background: #04552f;
+}
+
+.kural-credit {
+  color: #888;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+@media(max-width:600px) {
+  .kural-card {
+    padding: 22px 13px;
+  }
+
+  .kural-text {
+    font-size: 19px;
+  }
+
+  .kural-heading h2 {
+    font-size: 25px;
+  }
+}
+</style>
+
+
 <section id="share-writings">
   <h2>✍️ உங்கள் எழுத்துத் திறமையைப் பகிருங்கள்</h2>
   <p>
@@ -401,8 +553,6 @@
     </p>
   </div>
 </section>
-
- 
 
     <section class="container soft" id="learn">
       <div class="section-head">
@@ -609,6 +759,73 @@
     document.getElementById("prideSearch").addEventListener("keydown", event => {
       if (event.key === "Enter") doSearch();
     });
+
+async function loadDailyKural() {
+  const numberElement = document.getElementById("kural-number");
+  const chapterElement = document.getElementById("kural-chapter");
+  const textElement = document.getElementById("kural-text");
+  const meaningElement = document.getElementById("kural-meaning");
+  const paalElement = document.getElementById("kural-paal");
+  const dateElement = document.getElementById("kural-date");
+
+  dateElement.textContent = new Date().toLocaleDateString("ta-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  try {
+    // தினமும் அடுத்த குறள்; 1330 முடிந்ததும் மீண்டும் 1
+    const today = new Date();
+    const todayUTC = Date.UTC(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+
+    const startDate = Date.UTC(2026, 0, 1);
+    const daysPassed = Math.floor(
+      (todayUTC - startDate) / 86400000
+    );
+
+    const kuralNumber =
+      ((daysPassed % 1330) + 1330) % 1330 + 1;
+
+    const response = await fetch(
+      `https://kural.codewithram.dev/api/kural/${kuralNumber}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Kural API unavailable");
+    }
+
+    const data = await response.json();
+
+    numberElement.textContent = "குறள் எண்: " + data.number;
+    chapterElement.textContent =
+      data.chapter.names.ta || "திருக்குறள்";
+
+    textElement.textContent =
+      data.kural.join("\n");
+
+    meaningElement.textContent =
+      data.meaning.ta_mu_va || "பொருள் கிடைக்கவில்லை.";
+
+    paalElement.textContent =
+      "பால்: " + data.section.names.ta;
+
+  } catch (error) {
+    numberElement.textContent = "குறள் ஏற்றப்படவில்லை";
+    chapterElement.textContent = "மீண்டும் முயற்சிக்கவும்";
+    textElement.textContent =
+      "இணைய இணைப்பைச் சரிபார்க்கவும்.";
+    meaningElement.textContent = "";
+    paalElement.textContent = "";
+    console.error(error);
+  }
+}
+
+loadDailyKural();
 
   </script>
 </body>
