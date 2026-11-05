@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>தமிழ் கற்றல் மையம் | Tamilal Inaivom</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f8ef;
+  color: #24452e;
+}
+
+header {
+  background: linear-gradient(135deg, #075c38, #16834a);
+  color: white;
+  text-align: center;
+  padding: 45px 15px;
+}
+
+header h1 {
+  font-size: 36px;
+}
+
+header p {
+  font-size: 17px;
+}
+
+.container {
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px #00000012;
+}
+
+h2 {
+  color: #087a45;
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.letter {
+  background: #e4f4e8;
+  border: 1px solid #b7d9c0;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.letter:hover {
+  background: #bce6c7;
+}
+
+button {
+  background: #087a45;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 12px;
+}
+
+button:hover {
+  background: #04552f;
+}
+
+#question {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#result {
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.back {
+  display: inline-block;
+  color: white;
+  background: #b28b29;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  background: #075c38;
+  color: white;
+  padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>தமிழ் கற்றல் மையம்</h1>
+  <p>தமிழை எளிமையாகவும் மகிழ்ச்சியாகவும் கற்போம்!</p>
+  <a href="index.html" class="back">← முகப்புப் பக்கம்</a>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>📖 உயிரெழுத்துகள்</h2>
+    <p>தமிழில் 12 உயிரெழுத்துகள் உள்ளன. ஒவ்வொரு எழுத்தையும் அழுத்தி அதன் ஒலியைக் கேளுங்கள்.</p>
+    <div class="letters" id="uyir"></div>
+  </div>
+
+  <div class="card">
+    <h2>📖 மெய்யெழுத்துகள்</h2>
+    <p>தமிழில் 18 மெய்யெழுத்துகள் உள்ளன.</p>
+    <div class="letters" id="mei"></div>
+  </div>
+
+  <div class="card">
+    <h2>📖 எளிய தமிழ் சொற்கள்</h2>
+    <div class="letters" id="words"></div>
+  </div>
+
+  <div class="card">
+    <h2>📝 தமிழ் வினாடி வினா</h2>
+    <p id="question"></p>
+    <div id="answers"></div>
+    <p id="result"></p>
+    <button onclick="nextQuestion()">அடுத்த கேள்வி</button>
+  </div>
+
+</div>
+
+<footer>
+  <p>தமிழால் இணைவோம் | Tamilal Inaivom</p>
+  <p>தமிழைக் கற்போம்! தமிழை வளர்ப்போம்!</p>
+</footer>
+
+<script>
+const uyirLetters = [
+  "அ","ஆ","இ","ஈ","உ","ஊ",
+  "எ","ஏ","ஐ","ஒ","ஓ","ஔ"
+];
+
+const meiLetters = [
+  "க்","ங்","ச்","ஞ்","ட்","ண்",
+  "த்","ந்","ப்","ம்","ய்","ர்",
+  "ல்","வ்","ழ்","ள்","ற்","ன்"
+];
+
+const words = [
+  "அம்மா","அப்பா","தமிழ்","மரம்",
+  "நிலா","மலர்","பள்ளி","நன்றி"
+];
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("இந்த உலாவியில் குரல் வசதி இல்லை.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "ta-IN";
+  speech.rate = 0.75;
+
+  speechSynthesis.speak(speech);
+}
+
+function displayLetters(id, letters) {
+  const container = document.getElementById(id);
+
+  letters.forEach(letter => {
+    const button = document.createElement("button");
+    button.className = "letter";
+    button.textContent = letter;
+    button.onclick = () => speak(letter);
+    container.appendChild(button);
+  });
+}
+
+displayLetters("uyir", uyirLetters);
+displayLetters("mei", meiLetters);
+displayLetters("words", words);
+
+const questions = [
+  {
+    q: "தமிழில் எத்தனை உயிரெழுத்துகள் உள்ளன?",
+    a: ["10", "12", "18"],
+    correct: "12"
+  },
+  {
+    q: "தமிழில் எத்தனை மெய்யெழுத்துகள் உள்ளன?",
+    a: ["18", "12", "216"],
+    correct: "18"
+  },
+  {
+    q: "தமிழின் முதல் உயிரெழுத்து எது?",
+    a: ["ஆ", "இ", "அ"],
+    correct: "அ"
+  },
+  {
+    q: "தமிழில் மொத்தம் எத்தனை உயிர்மெய்யெழுத்துகள் உள்ளன?",
+    a: ["18", "216", "247"],
+    correct: "216"
+  }
+];
+
+let currentQuestion = 0;
+
+function showQuestion() {
+  const q = questions[currentQuestion];
+
+  document.getElementById("question").textContent = q.q;
+  document.getElementById("result").textContent = "";
+  document.getElementById("answers").innerHTML = "";
+
+  q.a.forEach(answer => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.style.marginRight = "8px";
+
+    button.onclick = () => {
+      const result = document.getElementById("result");
+
+      if (answer === q.correct) {
+        result.textContent = "சரியான பதில்! நன்று! 🎉";
+        result.style.color = "green";
+      } else {
+        result.textContent = "மீண்டும் முயற்சி செய்யுங்கள்!";
+        result.style.color = "red";
+      }
+    };
+
+    document.getElementById("answers").appendChild(button);
+  });
+}
+
+function nextQuestion() {
+  currentQuestion = (currentQuestion + 1) % questions.length;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
