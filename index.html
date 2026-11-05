@@ -13,6 +13,57 @@
   <title>தமிழால் இணைவோம் | Unite Through Tamil</title>
 
   <style>
+    .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--green-dark);
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+
+.brand span {
+  color: var(--gold);
+}
+    .site-logo {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+#share-writings {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f0fff4;
+  color: #14532d;
+  border-radius: 15px;
+}
+
+.writing-card {
+  background: white;
+  padding: 25px;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #0002;
+}
+
+.writing-btn {
+  display: inline-block;
+  background: #15803d;
+  color: white;
+  padding: 13px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 13px;
+  color: gray;
+}
     :root {
       --green: #176b45;
       --green-dark: #104b32;
@@ -248,22 +299,29 @@
 <body>
   <div class="topbar">தமிழ் மொழி • தமிழ் பண்பாடு • தமிழ் மக்கள்</div>
 
-  <header>
-    <nav class="nav">
-      <a class="brand" href="#home">தமிழால் <span>இணைவோம்</span></a>
-      <div class="nav-links">
-        <a href="#home">முகப்பு</a>
-        <a href="#about">எங்களைப் பற்றி</a>
-        <a href="#learn">தமிழைக் கற்போம்</a>
-        <a href="#pride">தமிழின் பெருமை</a>
-        <a href="#tamil-heritage">பாரம்பரியம்</a>
-        <a href="#projects">திட்டங்கள்</a>
-        <a href="#join">இணையுங்கள்</a>
-        <a href="#talent-gallery">எங்கள் திறமைகள்</a>
-        <a href="#feedback">கருத்துகளைப் பகிருங்கள்</a>
-      </div>
-    </nav>
-  </header>
+<header>
+  <nav class="nav">
+
+    <a class="brand" href="#home">
+      <img src="logo.png"
+           alt="Tamilal Inaivom Logo"
+           class="site-logo">
+      தமிழால் <span>இணைவோம்</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#home">முகப்பு</a>
+      <a href="#about">எங்களைப் பற்றி</a>
+      <a href="#learn">தமிழைக் கற்போம்</a>
+      <a href="#pride">தமிழின் பெருமை</a>
+      <a href="#tamil-heritage">பாரம்பரியம்</a>
+      <a href="#projects">திட்டங்கள்</a>
+      <a href="#join">இணையுங்கள்</a>
+      <a href="#feedback">கருத்துகளைப் பகிருங்கள்</a>
+    </div>
+
+  </nav>
+</header>
 
   <main>
     <section class="hero" id="home">
@@ -323,39 +381,7 @@
   </div>
 </section>
 
-<style>
-#share-writings {
-  text-align: center;
-  padding: 40px 20px;
-  background: #f0fff4;
-  color: #14532d;
-  border-radius: 15px;
-}
-
-.writing-card {
-  background: white;
-  padding: 25px;
-  max-width: 500px;
-  margin: 20px auto;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px #0002;
-}
-
-.writing-btn {
-  display: inline-block;
-  background: #15803d;
-  color: white;
-  padding: 13px 25px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.note {
-  font-size: 13px;
-  color: gray;
-}
-</style>
+ 
 
     <section class="container soft" id="learn">
       <div class="section-head">
