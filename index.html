@@ -294,22 +294,63 @@
       </div>
     </section>
 
-    <!-- TALENT SHARING SECTION -->
-    <section class="container" id="talent-gallery">
-      <div class="join-box">
-        <h2>🎨 உங்கள் திறமையைப் பகிருங்கள்</h2>
-        <p>நம் குழு உறுப்பினர்களின் திறமைகள், கலைகள் மற்றும் படைப்புகளை உலகத்துடன் பகிர்வோம்!</p>
-        <h2>📱 9750461651</h2>
-        <a class="btn"
-           href="https://wa.me/919750461651?text=வணக்கம்!%20எனது%20திறமையை%20தமிழால்%20இணைவோம்%20இணையதளத்தில்%20பகிர்கிறேன்."
-           target="_blank" rel="noopener noreferrer">
-          📸 WhatsApp-ல் உங்கள் திறமையை அனுப்புங்கள்
-        </a>
-        <p style="margin-top:15px; font-size:14px;">
-          குழு உறுப்பினர்கள் மட்டும் தங்கள் புகைப்படங்களை அனுப்பலாம்.
-          ஒப்புதல் பெற்ற புகைப்படங்கள் இணையதளத்தில் வெளியிடப்படும்.
-        </p>
-      </div>
+<section id="share-writings">
+  <h2>✍️ உங்கள் எழுத்துத் திறமையைப் பகிருங்கள்</h2>
+  <p>
+    உங்கள் கவிதைகள், சிறுகதைகள் மற்றும் கட்டுரைகளை
+    தமிழால் இணைவோம் சமூகத்துடன் பகிருங்கள்.
+  </p>
+
+  <div class="writing-card">
+    <h3>📚 Share Your Writings</h3>
+    <p>உங்கள் எழுத்துப் படைப்புகளை எங்களுக்கு Email செய்யுங்கள்.</p>
+
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tamilalinaivom.creations@gmail.com&su=Tamilal%20Inaivom%20-%20My%20Writing"
+   target="_blank"
+   class="writing-btn">
+   📩 Submit Your Writing
+</a>
+
+    <p class="note">
+      Note: Please send text writings only.
+    </p>
+  </div>
+</section>
+
+<style>
+#share-writings {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f0fff4;
+  color: #14532d;
+  border-radius: 15px;
+}
+
+.writing-card {
+  background: white;
+  padding: 25px;
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #0002;
+}
+
+.writing-btn {
+  display: inline-block;
+  background: #15803d;
+  color: white;
+  padding: 13px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 13px;
+  color: gray;
+}
+</style>
+
     </section>
 
     <section class="container soft" id="learn">
@@ -517,6 +558,7 @@
     document.getElementById("prideSearch").addEventListener("keydown", event => {
       if (event.key === "Enter") doSearch();
     });
+
   </script>
 </body>
 </html>
