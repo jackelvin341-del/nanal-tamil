@@ -1,833 +1,634 @@
-<!DOCTYPE html>
-<html lang="ta">
-<head>
-  <meta charset="UTF-8">
-
-  <meta name="google-site-verification"
-  content="kQV1rJF-4J7KbzjOvnARisCTv31mPfIFfXlOSHbGJAs" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="description" content="தமிழின் பெருமை, வரலாறு, இலக்கியம் மற்றும் பண்பாட்டை உலகத்துடன் இணைக்கும் முயற்சி.">
-
-  <title>தமிழால் இணைவோம் | Unite Through Tamil</title>
-
-  <style>
-    .brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--green-dark);
-  font-weight: 900;
-  font-size: 1.25rem;
-}
-
-.brand span {
-  color: var(--gold);
-}
-    .site-logo {
-  width: 65px;
-  height: 65px;
-  object-fit: contain;
-  border-radius: 50%;
-  vertical-align: middle;
-}
-
-#share-writings {
-  text-align: center;
-  padding: 40px 20px;
-  background: #f0fff4;
-  color: #14532d;
-  border-radius: 15px;
-}
-
-.writing-card {
-  background: white;
-  padding: 25px;
-  max-width: 500px;
-  margin: 20px auto;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px #0002;
-}
-
-.writing-btn {
-  display: inline-block;
-  background: #15803d;
-  color: white;
-  padding: 13px 25px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.note {
-  font-size: 13px;
-  color: gray;
-}
-    :root {
-      --green: #176b45;
-      --green-dark: #104b32;
-      --gold: #d6a84f;
-      --cream: #fffaf0;
-      --ink: #24352c;
-      --muted: #66756c;
-      --shadow: 0 12px 35px rgba(22, 65, 43, .10);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "Noto Sans Tamil", "Latha", "Arial", sans-serif;
-      background-color: var(--cream);
-      background-image:
-        linear-gradient(rgba(255,250,240,0.25), rgba(255,250,240,0.25)),
-        url("tamilal-inaivom-bg.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: var(--ink);
-      line-height: 1.75;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; }
-
-    .topbar {
-      background: var(--green-dark);
-      color: #fff;
-      text-align: center;
-      padding: 7px 14px;
-      font-size: .9rem;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(255,250,240,.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #e9e1d2;
-    }
-
-    .nav {
-      max-width: 1120px;
-      margin: auto;
-      padding: 14px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand { color: var(--green-dark); font-weight: 900; font-size: 1.25rem; }
-    .brand span { color: var(--gold); }
-    .nav-links { display: flex; flex-wrap: wrap; gap: 17px; font-size: .94rem; font-weight: 700; }
-    .nav-links a:hover { color: var(--green); }
-
-    .hero {
-      color: white;
-      text-align: center;
-      padding: 92px 20px 86px;
-      background:
-        linear-gradient(120deg, rgba(8,49,31,.88), rgba(23,107,69,.76)),
-        url("tamilal-inaivom-bg.png") center/cover no-repeat;
-    }
-
-    .hero-inner { max-width: 850px; margin: auto; }
-    .eyebrow { color: #f3d58f; letter-spacing: 2px; font-weight: 800; font-size: .88rem; }
-    h1 { font-size: clamp(2.2rem, 6vw, 4.4rem); line-height: 1.25; margin: 15px 0; }
-    .hero p { max-width: 700px; margin: 0 auto 25px; color: #f2f7f2; font-size: 1.08rem; }
-
-    .btn {
-      display: inline-block;
-      border: 0;
-      border-radius: 30px;
-      padding: 11px 22px;
-      background: var(--gold);
-      color: #172b20;
-      font-weight: 900;
-      cursor: pointer;
-      transition: transform .2s, opacity .2s;
-    }
-
-    .btn:hover { transform: translateY(-2px); opacity: .92; }
-    .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,.7); margin-left: 8px; }
-
-    .container { max-width: 1120px; margin: auto; padding: 68px 22px; }
-    .section-head { text-align: center; margin-bottom: 32px; }
-    .section-head h2 { color: var(--green-dark); font-size: clamp(1.65rem, 4vw, 2.35rem); }
-    .section-head p { color: var(--muted); margin-top: 6px; }
-
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card {
-      background: rgba(255,255,255,.94);
-      border: 1px solid #eee6d8;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-    .card .symbol { font-size: 2rem; }
-    .card h3 { color: var(--green); margin: 8px 0; }
-    .card p { color: var(--muted); }
-    .soft { background: rgba(243,245,235,.94); }
-
-    .quote {
-      max-width: 850px;
-      margin: auto;
-      text-align: center;
-      padding: 32px;
-      border-left: 5px solid var(--gold);
-      background: rgba(255,255,255,.95);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-    }
-    .quote .kural { color: var(--green-dark); font-size: 1.3rem; font-weight: 800; }
-    .quote small { color: var(--muted); }
-
-    .voice-panel {
-      max-width: 850px;
-      margin: 25px auto 0;
-      background: rgba(255,255,255,.95);
-      border: 1px solid #e9e1d2;
-      border-radius: 18px;
-      padding: 25px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .voice-panel h3 { color: var(--green-dark); margin-bottom: 8px; }
-    .voice-panel audio { width: min(100%, 520px); margin: 15px 0 5px; }
-    .small { color: var(--muted); font-size: .88rem; }
-
-    .search-box { max-width: 720px; margin: auto; display: flex; gap: 10px; }
-    .search-box input {
-      flex: 1;
-      min-width: 0;
-      padding: 13px 16px;
-      border: 1px solid #d9dfd6;
-      border-radius: 12px;
-      outline: none;
-      background: white;
-    }
-    .search-box input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(23,107,69,.1); }
-    .search-results { text-align: center; margin-top: 17px; color: var(--muted); }
-
-    .join-box {
-      background: var(--green-dark);
-      color: white;
-      text-align: center;
-      border-radius: 22px;
-      padding: 38px 24px;
-    }
-    .join-box h2 { font-size: 2rem; margin-bottom: 8px; }
-    .join-box p { color: #e1eee5; margin-bottom: 20px; }
-
-    footer { background: #0c3826; color: #dce9df; text-align: center; padding: 24px 15px; font-size: .9rem; }
-
-    .heritage-section {
-      padding: 65px 7%;
-      background: rgba(245,243,232,.94);
-      text-align: center;
-    }
-    .heritage-section h2 { color: #176b3a; font-size: 32px; margin-bottom: 10px; }
-    .heritage-intro { color: #626b5e; margin-bottom: 35px; }
-    .heritage-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 22px;
-      max-width: 1120px;
-      margin: auto;
-    }
-    .heritage-card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.09);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .heritage-card:hover { transform: translateY(-7px); }
-    .heritage-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
-    .heritage-card h3 { color: #176b3a; padding: 14px 8px 5px; margin: 0; }
-    .heritage-card p { color: #666; padding: 0 14px 18px; font-size: 14px; line-height: 1.6; }
-
-    .heritage-popup {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-    .heritage-popup-content {
-      background: #fffdf3;
-      max-width: 500px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-    .heritage-popup-content img { width: 100%; max-height: 280px; object-fit: cover; border-radius: 12px; }
-    .heritage-popup-content h2 { color: #176b3a; }
-    .heritage-close {
-      position: absolute;
-      right: 12px;
-      top: 8px;
-      border: none;
-      background: #176b3a;
-      color: white;
-      border-radius: 50%;
-      padding: 7px 11px;
-      cursor: pointer;
-    }
-
-    @media (max-width: 760px) {
-      .nav { align-items: flex-start; flex-direction: column; }
-      .nav-links { gap: 10px 15px; }
-      .cards { grid-template-columns: 1fr; }
-      .hero { padding: 70px 18px; }
-      .search-box { flex-direction: column; }
-      .btn-outline { margin: 10px 0 0; }
-    }
-    .academy-button {
-  display: inline-block;
-  background: linear-gradient(135deg, #087a45, #c69b32);
-  color: white;
-  padding: 15px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: 0.3s;
-}
-
-.academy-button:hover {
-  transform: translateY(-3px);
-}
-  </style>
-</head>
-
-<body>
-  <div class="topbar">தமிழ் மொழி • தமிழ் பண்பாடு • தமிழ் மக்கள்</div>
-
-<header>
-  <nav class="nav">
-
-    <a class="brand" href="#home">
-      <img src="logo.png"
-           alt="Tamilal Inaivom Logo"
-           class="site-logo">
-      தமிழால் <span>இணைவோம்</span>
-    </a>
-
-    <div class="nav-links">
-      <a href="#home">முகப்பு</a>
-      <a href="#about">எங்களைப் பற்றி</a>
-      <a href="#learn">தமிழைக் கற்போம்</a>
-      <a href="#pride">தமிழின் பெருமை</a>
-      <a href="#tamil-heritage">பாரம்பரியம்</a>
-      <a href="#projects">திட்டங்கள்</a>
-      <a href="#join">இணையுங்கள்</a>
-      <a href="#feedback">கருத்துகளைப் பகிருங்கள்</a>
-    </div>
-
-  </nav>
-</header>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-inner">
-        <div class="eyebrow">UNITE THROUGH TAMIL</div>
-        <h1>தமிழால் உலகை இணைப்போம்!</h1>
-        <p>நம் மொழி, நம் அடையாளம். தமிழ் இலக்கியம், வரலாறு, கலை மற்றும் பண்பாட்டை அடுத்த தலைமுறைக்கும் உலகெங்கும் வாழும் தமிழர்களுக்கும் கொண்டு செல்வோம்.</p>
-        <a class="btn" href="#about">எங்கள் பயணத்தை அறியுங்கள்</a>
-        <a class="btn btn-outline" href="#pride">தமிழின் குரலைக் கேளுங்கள்</a>
-        <br><br>
-
-<a href="tamil academy.html" class="academy-button">
-  📚 தமிழைக் கற்போம்
-</a>
-      </div>
-    </section>
-
-    <section class="container" id="about">
-      <div class="section-head">
-        <h2>எங்களைப் பற்றி</h2>
-        <p>தமிழை நேசிப்போம்; அறிவைப் பகிர்வோம்; ஒன்றிணைவோம்.</p>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <div class="symbol">📜</div>
-          <h3>மொழியின் மரபு</h3>
-          <p>தமிழ் இலக்கியங்கள், பழமையான நூல்கள் மற்றும் மொழியின் வளர்ச்சியை எளிய முறையில் அறிமுகப்படுத்துதல்.</p>
-        </article>
-        <article class="card">
-          <div class="symbol">🌏</div>
-          <h3>உலகத் தமிழர் இணைப்பு</h3>
-          <p>வெவ்வேறு நாடுகளிலும் வாழும் தமிழ் மக்களின் அனுபவங்களையும் படைப்புகளையும் பகிரும் மேடை.</p>
-        </article>
-        <article class="card">
-          <div class="symbol">💡</div>
-          <h3>அடுத்த தலைமுறை</h3>
-          <p>குழந்தைகள் மற்றும் இளைஞர்களிடம் தமிழ் வாசிப்பு, எழுத்து, படைப்பாற்றல் ஆகியவற்றை ஊக்குவித்தல்.</p>
-        </article>
-      </div>
-    </section>
-
-    
-<!-- DAILY THIRUKKURAL -->
-<section class="daily-kural" id="daily-kural">
-  <div class="kural-heading">
-    <span>📜 தினம் ஒரு திருக்குறள்</span>
-    <h2>இன்றைய குறள்</h2>
-    <p id="kural-date"></p>
-  </div>
-
-  <div class="kural-card">
-    <div class="kural-number" id="kural-number">
-      குறள் எண்: ஏற்றப்படுகிறது...
-    </div>
-
-    <h3 id="kural-chapter">திருவள்ளுவர் அருளிய திருக்குறள்</h3>
-
-    <div class="kural-text" id="kural-text">
-      குறள் ஏற்றப்படுகிறது...
-    </div>
-
-    <div class="kural-meaning">
-      <h4>💡 பொருள்</h4>
-      <p id="kural-meaning">பொருள் ஏற்றப்படுகிறது...</p>
-    </div>
-
-    <p class="kural-paal" id="kural-paal"></p>
-
-    <button onclick="loadDailyKural()" class="kural-refresh">
-      🔄 இன்றைய குறளை மீண்டும் ஏற்று
-    </button>
-  </div>
-
-  <p class="kural-credit">
-    திருவள்ளுவரின் திருக்குறள் – 1330 குறள்களின் தொகுப்பு
-  </p>
-</section>
 
 <style>
-.daily-kural {
-  max-width: 900px;
-  margin: 45px auto;
-  padding: 25px 18px;
-  text-align: center;
+/* TAMILAL INAIVOM QUIZ CENTRE */
+#ti-quiz {
+  --ti-green: #087443;
+  --ti-gold: #d9a62e;
+  --ti-dark: #123d2b;
   font-family: inherit;
+  color: #173c2c;
+  margin: 45px auto;
+  padding: 25px 15px;
+  max-width: 1050px;
 }
-
-.kural-heading span {
-  color: #c69b32;
-  font-weight: bold;
-  font-size: 17px;
+#ti-quiz * { box-sizing: border-box; }
+#ti-quiz .quiz-heading {
+  text-align: center;
+  margin-bottom: 28px;
 }
-
-.kural-heading h2 {
-  color: #075b36;
-  font-size: 30px;
-  margin: 12px 0;
+#ti-quiz .quiz-heading h2 {
+  font-size: clamp(27px,5vw,42px);
+  color: var(--ti-green);
+  margin-bottom: 8px;
 }
-
-.kural-heading p {
-  color: #777;
-}
-
-.kural-card {
-  background: linear-gradient(135deg, #fffdf4, #f0f8ed);
-  border: 2px solid #c69b32;
+#ti-quiz .quiz-heading p { color: #64776b; }
+#ti-quiz .quiz-panel {
+  background: #fff;
+  border: 1px solid #dce9df;
   border-radius: 20px;
-  padding: 30px 20px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  padding: 24px;
+  box-shadow: 0 8px 30px #174b2b12;
 }
-
-.kural-number {
-  color: #087442;
-  font-weight: bold;
-  font-size: 17px;
-  margin-bottom: 15px;
+#ti-quiz .quiz-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(145px,1fr));
+  gap: 13px;
 }
-
-.kural-card h3 {
-  color: #075b36;
-  font-size: 21px;
+#ti-quiz button, #ti-quiz select, #ti-quiz input {
+  font: inherit;
 }
-
-.kural-text {
-  color: #173e2a;
-  font-size: 23px;
-  line-height: 2;
-  font-weight: bold;
-  margin: 25px 0;
-  white-space: pre-line;
-}
-
-.kural-meaning {
-  background: rgba(255,255,255,0.8);
-  padding: 15px;
-  border-radius: 12px;
-  margin-top: 20px;
-}
-
-.kural-meaning h4 {
-  color: #a07816;
-  font-size: 19px;
-}
-
-.kural-meaning p {
-  color: #333;
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.kural-paal {
-  color: #087442;
-  font-weight: bold;
-  margin-top: 18px;
-}
-
-.kural-refresh {
-  background: #087442;
-  color: white;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 25px;
+#ti-quiz .category-btn {
+  background: #f1f8f2;
+  border: 2px solid #dceade;
+  border-radius: 14px;
+  padding: 18px 8px;
   cursor: pointer;
+  color: var(--ti-dark);
+  transition: .2s;
+}
+#ti-quiz .category-btn:hover,
+#ti-quiz .category-btn.active {
+  border-color: var(--ti-green);
+  background: #e3f4e7;
+  transform: translateY(-2px);
+}
+#ti-quiz .category-btn span {
+  display: block;
+  font-size: 29px;
+  margin-bottom: 7px;
+}
+#ti-quiz .quiz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+#ti-quiz select, #ti-quiz input {
+  padding: 12px;
+  border: 1px solid #cbdccf;
+  border-radius: 10px;
+  background: white;
+  color: #173c2c;
+  min-width: 0;
+}
+#ti-quiz .primary-btn {
+  background: var(--ti-green);
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 22px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#ti-quiz .primary-btn:hover { background: #075a35; }
+#ti-quiz .quiz-progress {
+  height: 9px;
+  background: #e5eee7;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 16px 0 23px;
+}
+#ti-quiz .quiz-progress div {
+  height: 100%;
+  width: 0;
+  background: var(--ti-green);
+  transition: .3s;
+}
+#ti-quiz .question-text {
+  font-size: 21px;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+#ti-quiz .quiz-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+  margin: 10px 0;
+  border: 1px solid #d6e4d9;
+  background: #f8fbf8;
+  border-radius: 11px;
+  cursor: pointer;
+  color: #173c2c;
+}
+#ti-quiz .quiz-option:hover:not(:disabled) {
+  border-color: var(--ti-green);
+  background: #edf7ef;
+}
+#ti-quiz .quiz-option.correct {
+  background: #d9f5df;
+  border-color: #25944c;
+}
+#ti-quiz .quiz-option.wrong {
+  background: #ffebeb;
+  border-color: #d95353;
+}
+#ti-quiz .quiz-option:disabled { cursor: default; }
+#ti-quiz .quiz-feedback {
   margin-top: 15px;
-  font-size: 15px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #f0f6f0;
+  line-height: 1.6;
 }
-
-.kural-refresh:hover {
-  background: #04552f;
+#ti-quiz .quiz-hidden { display: none !important; }
+#ti-quiz .quiz-result {
+  text-align: center;
+  padding: 25px 5px;
 }
-
-.kural-credit {
-  color: #888;
-  font-size: 12px;
+#ti-quiz .quiz-result .score {
+  font-size: 55px;
+  font-weight: bold;
+  color: var(--ti-green);
+}
+#ti-quiz .leaderboard {
+  margin-top: 25px;
+}
+#ti-quiz .leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#ti-quiz .leaderboard th,
+#ti-quiz .leaderboard td {
+  padding: 11px 8px;
+  border-bottom: 1px solid #e2ebe4;
+  text-align: left;
+}
+#ti-quiz .quiz-note {
+  color: #718276;
+  font-size: 13px;
   margin-top: 15px;
 }
-
-@media(max-width:600px) {
-  .kural-card {
-    padding: 22px 13px;
-  }
-
-  .kural-text {
-    font-size: 19px;
-  }
-
-  .kural-heading h2 {
-    font-size: 25px;
-  }
+@media(max-width:500px) {
+  #ti-quiz .quiz-panel { padding: 17px; }
+  #ti-quiz .quiz-controls > * { width: 100%; }
 }
 </style>
 
-
-<section id="share-writings">
-  <h2>✍️ உங்கள் எழுத்துத் திறமையைப் பகிருங்கள்</h2>
-  <p>
-    உங்கள் கவிதைகள், சிறுகதைகள் மற்றும் கட்டுரைகளை
-    தமிழால் இணைவோம் சமூகத்துடன் பகிருங்கள்.
-  </p>
-
-  <div class="writing-card">
-    <h3>📚 Share Your Writings</h3>
-    <p>உங்கள் எழுத்துப் படைப்புகளை எங்களுக்கு Email செய்யுங்கள்.</p>
-
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tamilalinaivom.creations@gmail.com&su=Tamilal%20Inaivom%20-%20My%20Writing"
-   target="_blank"
-   class="writing-btn">
-   📩 Submit Your Writing
-</a>
-
-    <p class="note">
-      Note: Please send text writings only.
-    </p>
+<section id="ti-quiz">
+  <div class="quiz-heading">
+    <h2>தமிழ் அறிவுத் தேர்வு</h2>
+    <h3>🏆 Tamilal Inaivom Quiz Centre</h3>
+    <p>Learn Tamil. Explore Tamil. Celebrate Tamil.</p>
   </div>
-</section>
 
-    <section class="container soft" id="learn">
-      <div class="section-head">
-        <h2>தமிழைக் கற்போம்</h2>
-        <p>சிறிய முயற்சியில் தொடங்கி, தமிழை தினமும் பயன்படுத்துவோம்.</p>
-      </div>
-      <div class="cards">
-        <article class="card">
-          <div class="symbol">அ</div>
-          <h3>எழுத்துகள்</h3>
-          <p>உயிரெழுத்து, மெய்யெழுத்து, உயிர்மெய்யெழுத்துகளைப் படித்து எழுதிப் பழகுங்கள்.</p>
-        </article>
-        <article class="card">
-          <div class="symbol">📖</div>
-          <h3>இலக்கியம்</h3>
-          <p>திருக்குறள், சங்க இலக்கியம் மற்றும் தமிழ் படைப்புகளைப் பற்றி அறிந்துகொள்ளுங்கள்.</p>
-        </article>
-        <article class="card">
-          <div class="symbol">✍️</div>
-          <h3>எழுதிப் பழகுங்கள்</h3>
-          <p>தினமும் சில தமிழ் சொற்களையும் வாக்கியங்களையும் எழுதிப் பாருங்கள்.</p>
-        </article>
-      </div>
-    </section>
+  <div class="quiz-panel" id="ti-home">
+    <h3>📚 Choose Your Quiz Category</h3>
+    <div class="quiz-categories" id="ti-categories">
+      <button class="category-btn active" data-cat="literature">
+        <span>📜</span> தமிழ் இலக்கியம்
+      </button>
+      <button class="category-btn" data-cat="kural">
+        <span>🪶</span> திருக்குறள்
+      </button>
+      <button class="category-btn" data-cat="history">
+        <span>🏛️</span> தமிழ் வரலாறு
+      </button>
+      <button class="category-btn" data-cat="culture">
+        <span>🎭</span> தமிழ் பண்பாடு
+      </button>
+      <button class="category-btn" data-cat="language">
+        <span>🔤</span> தமிழ் மொழி
+      </button>
+    </div>
 
-    <section class="container" id="pride">
-      <div class="section-head">
-        <h2>தமிழின் பெருமை</h2>
-        <p>மொழியை அறிதல் என்பது நம் மரபையும் சிந்தனையையும் அறிதல்.</p>
-      </div>
-      <div class="quote">
-        <div class="kural">அகர முதல எழுத்தெல்லாம் ஆதி<br>பகவன் முதற்றே உலகு.</div>
-        <small>திருக்குறள் — கடவுள் வாழ்த்து, குறள் 1</small>
-        <p style="margin-top:12px;">கல்விக்கும் அறிவுக்கும் அடித்தளமாக விளங்கும் திருவள்ளுவரின் சிந்தனையை நினைவுகூர்வோம்.</p>
-      </div>
-      <div class="voice-panel">
-        <h3>🎙️ தமிழின் குரல்</h3>
-        <p id="prideNarration">தமிழ்! வெறும் மொழியல்ல... இது நம் அடையாளம்! நம் பண்பாடு! நம் வரலாறு! தலைமுறைகள் கடந்து வாழும் நம் பெருமை! உலகின் எந்த மூலையில் இருந்தாலும், தமிழால் நாம் ஒன்றிணைவோம்! தமிழைக் கற்போம்! தமிழைப் பேசுவோம்! தமிழில் படைப்போம்! தமிழால் உலகை இணைப்போம்! தமிழ் வாழ்க! தமிழர் பெருமை ஓங்குக!</p>
-        <audio id="tamilAudio" controls preload="metadata">
-          <source src="tamil-pride.mp3" type="audio/mpeg">
-          உங்கள் உலாவியில் audio player ஆதரிக்கப்படவில்லை.
-        </audio>
-        <p class="small">tamil-pride.mp3 கோப்பை இந்த index.html கோப்பு இருக்கும் அதே இடத்தில் வைக்கவும்.</p>
-      </div>
-    </section>
+    <div class="quiz-controls">
+      <select id="ti-level" aria-label="Difficulty">
+        <option value="easy">Easy – எளிது</option>
+        <option value="medium">Medium – நடுத்தரம்</option>
+        <option value="hard">Hard – கடினம்</option>
+      </select>
+      <button class="primary-btn" id="ti-start">Start Quiz 🚀</button>
+    </div>
+    <p class="quiz-note">Each quiz contains 10 questions. Test your Tamil knowledge!</p>
+  </div>
 
-    <section class="heritage-section" id="tamil-heritage">
-      <h2>🌿 தமிழர் பண்பாட்டுக் களஞ்சியம்</h2>
-      <p class="heritage-intro">
-        Discover the traditional games, dances, music and arts of Tamil people.
-        <br>நம் பாரம்பரியத்தை அறிந்து பெருமை கொள்வோம்!
-      </p>
-      <div class="heritage-grid">
-        <div class="heritage-card">
-          <img src="pallanguzhi.jpg" alt="Pallanguzhi">
-          <h3>பல்லாங்குழி</h3>
-          <p>A traditional Tamil indoor board game.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="silambam.jpg" alt="Silambam">
-          <h3>சிலம்பம்</h3>
-          <p>An ancient Tamil martial art.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="kabaddi.jpg" alt="Kabaddi">
-          <h3>கபடி</h3>
-          <p>A traditional team sport popular in Tamil villages.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="bharatanatyam.jpg" alt="Bharatanatyam">
-          <h3>பரதநாட்டியம்</h3>
-          <p>A classical dance form with a rich Tamil tradition.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="karagattam.jpg" alt="Karagattam">
-          <h3>கரகாட்டம்</h3>
-          <p>A traditional Tamil folk dance.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="oyilattam.jpg" alt="Oyilattam">
-          <h3>ஒயிலாட்டம்</h3>
-          <p>A colourful traditional folk dance.</p>
-        </div>
-        <div class="heritage-card">
-          <img src="therukoothu.jpg" alt="Therukoothu">
-          <h3>தெருக்கூத்து</h3>
-          <p>A traditional Tamil street theatre art.</p>
-        </div>
-      </div>
-    </section>
+  <div class="quiz-panel quiz-hidden" id="ti-game">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+      <strong id="ti-category-name">Tamil Quiz</strong>
+      <strong id="ti-counter">1 / 10</strong>
+    </div>
+    <div class="quiz-progress"><div id="ti-progress"></div></div>
+    <div id="ti-question" class="question-text"></div>
+    <div id="ti-options"></div>
+    <div id="ti-feedback" class="quiz-feedback quiz-hidden" aria-live="polite"></div>
+    <button class="primary-btn quiz-hidden" id="ti-next" style="margin-top:18px">Next Question →</button>
+  </div>
 
-    <section class="container soft" id="projects">
-      <div class="section-head">
-        <h2>தமிழ் அறிவுத் தேடல்</h2>
-        <p>ஒரு தலைப்பைத் தேடி, மேலும் படிக்கத் தொடங்குங்கள்.</p>
-      </div>
-      <div class="search-box">
-        <input id="prideSearch" type="search" placeholder="உதாரணம்: திருக்குறள், சங்க இலக்கியம், தமிழ் வரலாறு">
-        <button class="btn" id="searchBtn" type="button">தேடுக</button>
-      </div>
-      <div class="search-results" id="searchResults" aria-live="polite">தேட வேண்டிய தலைப்பை உள்ளிடுங்கள்.</div>
-    </section>
-
-    <section class="container" id="join">
-      <div class="join-box">
-        <h2>தமிழால் இணைவோம்!</h2>
-        <p>தமிழை நேசிக்கும் ஒவ்வொருவரின் சிறிய பங்களிப்பும் பெரிய மாற்றத்தை உருவாக்கும்.</p>
-        <a class="btn"
-           href="https://docs.google.com/forms/d/e/1FAIpQLSc_QihNMIgonowXdG1yXjGZxAX3tuSFX8b9Cy0kkP8ZWtcc8g/viewform?usp=publish-editor"
-           target="_blank" rel="noopener noreferrer">
-          எங்களுடன் இணையுங்கள்
-        </a>
-      </div>
-    </section>
-
-    <!-- VISITOR FEEDBACK SECTION
-         Replace the placeholder URL below with the responder link
-         for your Google Form: Tamilal Inaivom – Visitor Feedback. -->
-    <section class="container" id="feedback">
-      <div class="join-box">
-        <h2>💚 உங்கள் கருத்துகள் எங்களுக்கு முக்கியம்!</h2>
-        <p>தமிழால் இணைவோம் இணையதளத்தை மேம்படுத்த உங்கள் கருத்துகளைப் பகிருங்கள்.</p>
-        <h3>⭐ உங்கள் மதிப்பீட்டை வழங்குங்கள்</h3>
-        <p>உங்கள் அனுபவத்தையும் ஆலோசனைகளையும் எங்களுடன் பகிருங்கள்!</p>
-        <a class="btn"
-           href="https://docs.google.com/forms/d/e/1FAIpQLSd_gRqUL8l6yRzlzRpP1mQXUxwqlLs9IbyStCILWTnQdXPzEg/viewform?usp=header"
-           target="_blank" rel="noopener noreferrer">
-          💬 உங்கள் கருத்தைப் பகிருங்கள்
-        </a>
-        <p style="margin-top:15px;font-size:14px;">
-          உங்கள் கருத்துகளுக்கு நன்றி! தமிழால் இணைவோம் ❤️
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2026 தமிழால் இணைவோம் | Unite Through Tamil</p>
-    <p>தமிழ் வாழ்க! உலகத் தமிழர் ஒன்றிணைவோம்!</p>
-    <p>உருவாக்கியவர்: Jac Kelvin மற்றும் குழுவினர்</p>
-  </footer>
-
-  <div class="heritage-popup" id="heritagePopup">
-    <div class="heritage-popup-content">
-      <button class="heritage-close" onclick="closeHeritage()" aria-label="Close">✕</button>
-      <img id="popupImage" src="" alt="">
-      <h2 id="popupTitle"></h2>
-      <p id="popupDescription"></p>
+  <div class="quiz-panel quiz-hidden" id="ti-result">
+    <div class="quiz-result">
+      <h2>🎉 Quiz Completed!</h2>
+      <div class="score" id="ti-score">0/10</div>
+      <h3 id="ti-message"></h3>
+      <p id="ti-detail"></p>
+      <input id="ti-player" maxlength="20" placeholder="Enter your name" aria-label="Player name">
+      <button class="primary-btn" id="ti-save">Save Score 🏆</button>
+      <br><br>
+      <button class="primary-btn" id="ti-again">Play Again</button>
     </div>
   </div>
 
-  <script>
-    const heritageInfo = {
-      "பல்லாங்குழி": "பாரம்பரியமாக மரப்பலகையில் குழிகள் அமைத்து விளையாடப்படும் தமிழர் விளையாட்டு.",
-      "சிலம்பம்": "மூங்கில் கம்பைப் பயன்படுத்தும் பாரம்பரியத் தமிழ் தற்காப்புக் கலை.",
-      "கபடி": "குழுவாக விளையாடப்படும் பாரம்பரியமான விளையாட்டு.",
-      "பரதநாட்டியம்": "அபிநயம், இசை மற்றும் தாளம் இணைந்த செம்மையான பாரம்பரிய நடனக்கலை.",
-      "கரகாட்டம்": "தலையில் கரகம் ஏந்தி ஆடும் தமிழர் நாட்டுப்புற நடனம்.",
-      "ஒயிலாட்டம்": "இசைக்கேற்ப குழுவாக அசைவுகளுடன் ஆடப்படும் நாட்டுப்புற நடனம்.",
-      "தெருக்கூத்து": "திறந்தவெளியில் பாடல், நடிப்பு, இசையுடன் நிகழ்த்தப்படும் தமிழர் நாடகக்கலை."
-    };
+  <div class="quiz-panel leaderboard">
+    <h3>🏆 Leaderboard – முன்னணி வீரர்கள்</h3>
+    <div id="ti-leaderboard"></div>
+    <p class="quiz-note">Scores are stored only in this browser. A shared online leaderboard requires a database.</p>
+  </div>
+</section>
 
-    document.querySelectorAll(".heritage-card").forEach(card => {
-      card.addEventListener("click", () => {
-        const image = card.querySelector("img");
-        const title = card.querySelector("h3").textContent.trim();
-        document.getElementById("popupImage").src = image.src;
-        document.getElementById("popupImage").alt = title;
-        document.getElementById("popupTitle").textContent = title;
-        document.getElementById("popupDescription").textContent =
-          heritageInfo[title] || "Explore this beautiful Tamil tradition.";
-        document.getElementById("heritagePopup").style.display = "flex";
-      });
-    });
+<script>
+(() => {
+  const root = document.getElementById("ti-quiz");
+  if (!root) return;
 
-    function closeHeritage() {
-      document.getElementById("heritagePopup").style.display = "none";
+  const questions = {
+    literature: {
+      easy: [
+        ["திருக்குறளை இயற்றியவர் யார்?",["திருவள்ளுவர்","கம்பர்","இளங்கோ அடிகள்","அவ்வையார்"],0,"திருவள்ளுவர் திருக்குறளை இயற்றினார்."],
+        ["சிலப்பதிகாரத்தின் ஆசிரியர் யார்?",["கம்பர்","இளங்கோ அடிகள்","சீத்தலைச் சாத்தனார்","திருவள்ளுவர்"],1,"இளங்கோ அடிகள் சிலப்பதிகாரத்தை இயற்றினார்."],
+        ["மணிமேகலையின் ஆசிரியர் யார்?",["சீத்தலைச் சாத்தனார்","கம்பர்","பாரதியார்","ஒட்டக்கூத்தர்"],0,"மணிமேகலையை இயற்றியவர் சீத்தலைச் சாத்தனார்."],
+        ["கம்பராமாயணத்தை இயற்றியவர் யார்?",["சேக்கிழார்","கம்பர்","திருவள்ளுவர்","அவ்வையார்"],1,"கம்பர் கம்பராமாயணத்தை இயற்றினார்."],
+        ["ஆத்திசூடியை இயற்றியவர் யார்?",["அவ்வையார்","கம்பர்","பாரதிதாசன்","இளங்கோ அடிகள்"],0,"ஆத்திசூடி அவ்வையாரின் புகழ்பெற்ற படைப்பு."],
+        ["புறநானூறு எந்தத் தொகுப்பைச் சேர்ந்தது?",["எட்டுத்தொகை","பத்துப்பாட்டு","ஐம்பெருங்காப்பியம்","பதினெண்கீழ்க்கணக்கு"],0,"புறநானூறு எட்டுத்தொகையில் இடம்பெற்றுள்ளது."],
+        ["தமிழின் முதல் எழுத்து எது?",["அ","ஆ","இ","ஈ"],0,"அ என்பது தமிழ் உயிரெழுத்துகளின் முதல் எழுத்து."],
+        ["சீவக சிந்தாமணியை இயற்றியவர் யார்?",["திருத்தக்கதேவர்","கம்பர்","சேக்கிழார்","புகழேந்தி"],0,"திருத்தக்கதேவர் சீவக சிந்தாமணியை இயற்றினார்."],
+        ["பெரியபுராணத்தை இயற்றியவர் யார்?",["சேக்கிழார்","கம்பர்","திருவள்ளுவர்","நக்கீரர்"],0,"சேக்கிழார் பெரியபுராணத்தை இயற்றினார்."],
+        ["நாலடியார் எந்த வகை நூல்?",["அறநூல்","அறிவியல் நூல்","புதினம்","நாடகம்"],0,"நாலடியார் ஒரு அறநூல்."]
+      ],
+      medium: [
+        ["எட்டுத்தொகையில் இடம்பெறாத நூல் எது?",["அகநானூறு","குறுந்தொகை","திருக்குறள்","புறநானூறு"],2,"திருக்குறள் பதினெண்கீழ்க்கணக்கு நூல்களில் ஒன்று."],
+        ["பத்துப்பாட்டில் இடம்பெறும் நூல் எது?",["மதுரைக்காஞ்சி","நாலடியார்","திருக்குறள்","நான்மணிக்கடிகை"],0,"மதுரைக்காஞ்சி பத்துப்பாட்டில் இடம்பெறுகிறது."],
+        ["ஐம்பெருங்காப்பியங்களில் ஒன்று எது?",["மணிமேகலை","நற்றிணை","கலித்தொகை","பரிபாடல்"],0,"மணிமேகலை ஐம்பெருங்காப்பியங்களில் ஒன்று."],
+        ["பதிற்றுப்பத்து முக்கியமாக எந்த அரச மரபைப் பற்றியது?",["சேரர்","சோழர்","பாண்டியர்","பல்லவர்"],0,"பதிற்றுப்பத்து சேர மன்னர்களைப் பற்றிய செய்திகளை வழங்குகிறது."],
+        ["குறிஞ்சி நிலத்தின் உரிப்பொருள் எது?",["புணர்தல்","பிரிதல்","இருத்தல்","இரங்கல்"],0,"குறிஞ்சி நிலத்தின் உரிப்பொருள் புணர்தல்."],
+        ["நற்றிணை எந்தத் தொகுப்பில் உள்ளது?",["எட்டுத்தொகை","பத்துப்பாட்டு","ஐம்பெருங்காப்பியம்","பதினெண்கீழ்க்கணக்கு"],0,"நற்றிணை எட்டுத்தொகை நூல்களில் ஒன்று."],
+        ["திருவாசகத்தை இயற்றியவர் யார்?",["மாணிக்கவாசகர்","அப்பர்","சம்பந்தர்","சுந்தரர்"],0,"திருவாசகத்தை இயற்றியவர் மாணிக்கவாசகர்."],
+        ["தேவாரம் பாடிய மூவரில் ஒருவர் யார்?",["அப்பர்","கம்பர்","சேக்கிழார்","பட்டினத்தார்"],0,"அப்பர் தேவாரம் பாடிய மூவரில் ஒருவர்."],
+        ["கலித்தொகை எந்தத் தொகுப்பைச் சேர்ந்தது?",["எட்டுத்தொகை","பத்துப்பாட்டு","காப்பியம்","பக்தி இலக்கியம்"],0,"கலித்தொகை எட்டுத்தொகையில் இடம்பெறுகிறது."],
+        ["திருமுருகாற்றுப்படையை இயற்றியவர் யார்?",["நக்கீரர்","கம்பர்","பாரதியார்","அவ்வையார்"],0,"திருமுருகாற்றுப்படை நக்கீரருக்கு உரியதாகக் கருதப்படுகிறது."]
+      ],
+      hard: [
+        ["தொல்காப்பியத்தின் மூன்று அதிகாரங்கள் யாவை?",["எழுத்து, சொல், பொருள்","அறம், பொருள், இன்பம்","அகம், புறம், களவு","இயல், இசை, நாடகம்"],0,"தொல்காப்பியம் எழுத்து, சொல், பொருள் என மூன்று அதிகாரங்களைக் கொண்டது."],
+        ["அகநானூற்றில் உள்ள பாடல்களின் எண்ணிக்கை என்ன?",["400","300","500","100"],0,"அகநானூற்றில் 400 பாடல்கள் உள்ளன."],
+        ["ஐங்குறுநூற்றில் மொத்தம் எத்தனை பாடல்கள் உள்ளன?",["500","400","300","100"],0,"ஐங்குறுநூற்றில் 500 பாடல்கள் உள்ளன."],
+        ["பத்துப்பாட்டில் மிக நீளமான நூல் எது?",["மதுரைக்காஞ்சி","முல்லைப்பாட்டு","நெடுநல்வாடை","பட்டினப்பாலை"],0,"மதுரைக்காஞ்சி பத்துப்பாட்டில் மிக நீளமானது."],
+        ["குறுந்தொகையில் உள்ள பாடல்களின் எண்ணிக்கை என்ன?",["400","200","500","100"],0,"குறுந்தொகையில் 400 பாடல்கள் உள்ளன."],
+        ["பரிபாடல் எந்தத் தொகுப்பைச் சேர்ந்தது?",["எட்டுத்தொகை","பத்துப்பாட்டு","ஐம்பெருங்காப்பியம்","பதினெண்கீழ்க்கணக்கு"],0,"பரிபாடல் எட்டுத்தொகையின் ஒரு நூல்."],
+        ["பத்துப்பாட்டில் இடம்பெறும் ஆற்றுப்படை நூல் எது?",["பொருநராற்றுப்படை","நாலடியார்","இனியவை நாற்பது","குறுந்தொகை"],0,"பொருநராற்றுப்படை பத்துப்பாட்டில் இடம்பெறுகிறது."],
+        ["பதினெண்கீழ்க்கணக்கு நூல்களில் ஒன்று எது?",["இனியவை நாற்பது","பட்டினப்பாலை","முல்லைப்பாட்டு","சிலப்பதிகாரம்"],0,"இனியவை நாற்பது பதினெண்கீழ்க்கணக்கு நூல்களில் ஒன்று."],
+        ["திணை எத்தனை வகைப்படும்?",["ஐந்து","மூன்று","ஏழு","பத்து"],0,"குறிஞ்சி, முல்லை, மருதம், நெய்தல், பாலை என ஐந்து திணைகள் உள்ளன."],
+        ["புறநானூறு முதன்மையாக எதைப் பேசுகிறது?",["புறவாழ்க்கை","காதல் வாழ்க்கை","இலக்கணம்","மருத்துவம்"],0,"புறநானூறு வீரம், புகழ், கொடை போன்ற புறவாழ்க்கைச் செய்திகளைப் பேசுகிறது."]
+      ]
+    },
+    kural: {
+      easy: [
+        ["திருக்குறளில் மொத்தம் எத்தனை குறள்கள் உள்ளன?",["1330","1000","1080","1500"],0,"திருக்குறளில் 133 அதிகாரங்கள்; ஒவ்வொன்றிலும் 10 குறள்கள் உள்ளன."],
+        ["திருக்குறளில் எத்தனை அதிகாரங்கள் உள்ளன?",["133","100","108","150"],0,"திருக்குறளில் 133 அதிகாரங்கள் உள்ளன."],
+        ["திருக்குறளின் முதல் அதிகாரம் எது?",["கடவுள் வாழ்த்து","வான்சிறப்பு","நீத்தார் பெருமை","அறன் வலியுறுத்தல்"],0,"முதல் அதிகாரம் கடவுள் வாழ்த்து."],
+        ["திருக்குறள் எந்த மொழியில் எழுதப்பட்டது?",["தமிழ்","சமஸ்கிருதம்","பாலி","பிராகிருதம்"],0,"திருக்குறள் தமிழில் இயற்றப்பட்டது."],
+        ["திருக்குறளின் மூன்று பால்கள் எவை?",["அறம், பொருள், இன்பம்","அகம், புறம், வீரம்","இயல், இசை, நாடகம்","கல்வி, செல்வம், புகழ்"],0,"அறத்துப்பால், பொருட்பால், காமத்துப்பால் ஆகியவை மூன்று பால்கள்."],
+        ["திருக்குறளில் ஒவ்வொரு அதிகாரத்திலும் எத்தனை குறள்கள்?",["10","5","12","15"],0,"ஒவ்வொரு அதிகாரத்திலும் 10 குறள்கள் உள்ளன."],
+        ["திருக்குறளின் ஆசிரியர் யார்?",["திருவள்ளுவர்","கம்பர்","அவ்வையார்","பாரதியார்"],0,"திருவள்ளுவர் திருக்குறளை இயற்றினார்."],
+        ["திருக்குறளில் முதல் குறள் எந்த எழுத்தில் தொடங்குகிறது?",["அ","ஆ","இ","உ"],0,"அகர முதல எழுத்தெல்லாம் என்று முதல் குறள் தொடங்குகிறது."],
+        ["திருக்குறள் எந்த வகை நூல்?",["அறநூல்","காப்பியம்","நாடகம்","புதினம்"],0,"திருக்குறள் உலகப் புகழ்பெற்ற அறநூல்."],
+        ["திருக்குறளின் கடைசி பால் எது?",["காமத்துப்பால்","அறத்துப்பால்","பொருட்பால்","இன்பியல்"],0,"காமத்துப்பால் மூன்றாவது பால்."]
+      ],
+      medium: [
+        ["அறத்துப்பாலில் எத்தனை அதிகாரங்கள் உள்ளன?",["38","25","70","50"],0,"அறத்துப்பாலில் 38 அதிகாரங்கள் உள்ளன."],
+        ["பொருட்பாலில் எத்தனை அதிகாரங்கள் உள்ளன?",["70","38","25","50"],0,"பொருட்பாலில் 70 அதிகாரங்கள் உள்ளன."],
+        ["காமத்துப்பாலில் எத்தனை அதிகாரங்கள் உள்ளன?",["25","38","70","30"],0,"காமத்துப்பாலில் 25 அதிகாரங்கள் உள்ளன."],
+        ["திருக்குறளின் யாப்பு வகை எது?",["குறள் வெண்பா","ஆசிரியப்பா","கலிப்பா","வஞ்சிப்பா"],0,"திருக்குறள் குறள் வெண்பா யாப்பில் அமைந்துள்ளது."],
+       ["முதல் குறள் எந்த எழுத்தில் தொடங்குகிறது?",
+ ["அ","ஆ","இ","உ"],
+ 0,
+ "அகர முதல எழுத்தெல்லாம் என்று முதல் குறள் தொடங்குகிறது."],
+        ["'அன்புடைமை' எந்தப் பாலில் இடம்பெறுகிறது?",["அறத்துப்பால்","பொருட்பால்","காமத்துப்பால்","எதிலும் இல்லை"],0,"அன்புடைமை அறத்துப்பாலில் இடம்பெறுகிறது."],
+        ["திருக்குறளில் மொத்தம் எத்தனை குறள் அடிகள் உள்ளன?",["2660","1330","3990","2000"],0,"ஒவ்வொரு குறளிலும் இரண்டு அடிகள்; 1330 × 2 = 2660."],
+        ["திருக்குறளின் ஆங்கில மொழிபெயர்ப்புப் பணிக்குப் பெயர் பெற்றவர் யார்?",["ஜி.யு. போப்","கால்டுவெல்","வீரமாமுனிவர்","ராபர்ட் டி நோபிலி"],0,"ஜி.யு. போப் திருக்குறளை ஆங்கிலத்தில் மொழிபெயர்த்தவர்களில் புகழ்பெற்றவர்."],
+        ["'வான்சிறப்பு' எந்த அதிகாரம்?",["இரண்டாம்","முதல்","மூன்றாம்","நான்காம்"],0,"வான்சிறப்பு இரண்டாவது அதிகாரம்."],
+        ["'கல்வி' அதிகாரம் எந்தப் பாலில் வருகிறது?",["பொருட்பால்","அறத்துப்பால்","காமத்துப்பால்","எதிலும் இல்லை"],0,"கல்வி அதிகாரம் பொருட்பாலில் வருகிறது."]
+      ],
+      hard: [
+        ["திருக்குறளில் மொத்தம் எத்தனை இயல்கள் உள்ளன?",["9","3","13","10"],0,"மூன்று பால்களும் சேர்த்து 9 இயல்கள் உள்ளன."],
+        ["அறத்துப்பாலில் எத்தனை இயல்கள் உள்ளன?",["4","3","5","2"],0,"அறத்துப்பாலில் 4 இயல்கள் உள்ளன."],
+        ["பொருட்பாலில் எத்தனை இயல்கள் உள்ளன?",["3","4","5","2"],0,"பொருட்பாலில் 3 இயல்கள் உள்ளன."],
+        ["காமத்துப்பாலில் எத்தனை இயல்கள் உள்ளன?",["2","3","4","5"],0,"காமத்துப்பாலில் 2 இயல்கள் உள்ளன."],
+        ["திருக்குறளில் பயன்படுத்தப்படாத தமிழ் எழுத்து எது?",["ஔ","அ","க","ம"],0,"ஔ என்ற எழுத்து திருக்குறளில் பயன்படுத்தப்படவில்லை எனப் பொதுவாகக் குறிப்பிடப்படுகிறது."],
+        ["திருக்குறளின் முதல் அதிகாரத்தில் எத்தனை குறள்கள் உள்ளன?",["10","5","12","15"],0,"ஒவ்வொரு அதிகாரத்திலும் பத்து குறள்கள் உள்ளன."],
+        ["'ஊழ்' அதிகாரம் எந்தப் பாலில் உள்ளது?",["பொருட்பால்","அறத்துப்பால்","காமத்துப்பால்","எதிலும் இல்லை"],0,"ஊழ் அதிகாரம் பொருட்பாலில் இடம்பெறுகிறது."],
+        ["திருக்குறளில் 'நட்பு' அதிகாரம் எந்தப் பாலில் உள்ளது?",["பொருட்பால்","அறத்துப்பால்","காமத்துப்பால்","எதிலும் இல்லை"],0,"நட்பு அதிகாரம் பொருட்பாலில் உள்ளது."],
+        ["திருக்குறளின் மூன்றாவது அதிகாரம் எது?",["நீத்தார் பெருமை","வான்சிறப்பு","கடவுள் வாழ்த்து","அறன் வலியுறுத்தல்"],0,"மூன்றாவது அதிகாரம் நீத்தார் பெருமை."],
+        ["திருக்குறளின் நான்காவது அதிகாரம் எது?",["அறன் வலியுறுத்தல்","நீத்தார் பெருமை","வான்சிறப்பு","ஒழுக்கமுடைமை"],0,"நான்காவது அதிகாரம் அறன் வலியுறுத்தல்."]
+      ]
+    },
+    history: {
+      easy: [
+        ["பூம்புகார் எந்த அரச மரபின் முக்கியத் துறைமுகமாக இருந்தது?",["சோழர்","சேரர்","பாண்டியர்","பல்லவர்"],0,"பூம்புகார் சோழர்களின் புகழ்பெற்ற துறைமுகமாக இருந்தது."],
+        ["மதுரை எந்த அரச மரபின் தலைநகரமாக விளங்கியது?",["பாண்டியர்","சேரர்","சோழர்","பல்லவர்"],0,"மதுரை பாண்டியர்களின் முக்கியத் தலைநகரமாக இருந்தது."],
+        ["வஞ்சி எந்த அரச மரபுடன் தொடர்புடையது?",["சேரர்","சோழர்","பாண்டியர்","பல்லவர்"],0,"வஞ்சி சேரர்களின் தலைநகரமாகக் குறிப்பிடப்படுகிறது."],
+        ["தஞ்சைப் பெரிய கோயிலைக் கட்டியவர் யார்?",["முதலாம் இராஜராஜ சோழன்","கரிகால சோழன்","ராஜேந்திர சோழன்","மகேந்திரவர்மன்"],0,"முதலாம் இராஜராஜ சோழன் பெரிய கோயிலைக் கட்டினார்."],
+        ["மாமல்லபுரம் எந்த அரச மரபின் கலைப்பணிகளுக்குப் புகழ்பெற்றது?",["பல்லவர்","சேரர்","பாண்டியர்","சோழர்"],0,"பல்லவர்களின் சிற்பக்கலைக்கு மாமல்லபுரம் புகழ்பெற்றது."],
+        ["கல்லணையைக் கட்டியதாகப் பாரம்பரியமாகக் கூறப்படும் மன்னர் யார்?",["கரிகால சோழன்","ராஜராஜ சோழன்","நெடுஞ்செழியன்","சேரன் செங்குட்டுவன்"],0,"கல்லணை கரிகால சோழனுடன் தொடர்புபடுத்தப்படுகிறது."],
+        ["சங்க இலக்கியங்கள் எந்த மொழியில் உள்ளன?",["தமிழ்","சமஸ்கிருதம்","பாலி","பிராகிருதம்"],0,"சங்க இலக்கியங்கள் தமிழில் இயற்றப்பட்டவை."],
+        ["சோழர்களின் புலிக்கொடி எதைக் குறிக்கிறது?",["புலி","வில்","மீன்","யானை"],0,"புலி சோழர்களின் அரசச் சின்னம்."],
+        ["பாண்டியர்களின் சின்னம் எது?",["மீன்","புலி","வில்","சிங்கம்"],0,"மீன் பாண்டியர்களின் அரசச் சின்னம்."],
+        ["சேரர்களின் சின்னம் எது?",["வில்","மீன்","புலி","சங்கு"],0,"வில் சேரர்களின் அரசச் சின்னமாக அறியப்படுகிறது."]
+      ],
+      medium: [
+        ["கங்கைகொண்ட சோழபுரத்தை உருவாக்கியவர் யார்?",["முதலாம் இராஜேந்திர சோழன்","ராஜராஜ சோழன்","கரிகால சோழன்","குலோத்துங்க சோழன்"],0,"முதலாம் இராஜேந்திர சோழன் கங்கைகொண்ட சோழபுரத்தை உருவாக்கினார்."],
+        ["உத்திரமேரூர் கல்வெட்டுகள் எதற்குப் புகழ்பெற்றவை?",["குடவோலைத் தேர்தல் முறை","கடல் வணிகம்","போர் முறை","நாணய முறை"],0,"உத்திரமேரூர் கல்வெட்டுகள் உள்ளாட்சி நிர்வாகம் மற்றும் குடவோலை முறையை விளக்குகின்றன."],
+        ["சோழர் கால வெண்கலச் சிற்பங்களில் புகழ்பெற்ற வடிவம் எது?",["நடராஜர்","புத்தர்","மகாவீரர்","கருடன்"],0,"சோழர் கால நடராஜர் வெண்கலச் சிற்பங்கள் உலகப் புகழ்பெற்றவை."],
+        ["பழங்காலத் தமிழகத்தின் மூவேந்தர்கள் யாவர்?",["சேரர், சோழர், பாண்டியர்","பல்லவர், களப்பிரர், சாளுக்கியர்","சேரர், பல்லவர், விஜயநகரர்","சோழர், மராத்தியர், பாண்டியர்"],0,"மூவேந்தர்கள் சேரர், சோழர், பாண்டியர்."],
+        ["பட்டினப்பாலை எந்த நகரத்தின் சிறப்பைக் கூறுகிறது?",["காவிரிப்பூம்பட்டினம்","மதுரை","வஞ்சி","காஞ்சிபுரம்"],0,"பட்டினப்பாலை காவிரிப்பூம்பட்டினத்தின் சிறப்பை விவரிக்கிறது."],
+        ["முதலாம் இராஜராஜ சோழனின் புகழ்பெற்ற கோயில் எது?",["தஞ்சைப் பெரிய கோயில்","மீனாட்சி கோயில்","கைலாசநாதர் கோயில்","கருமாரியம்மன் கோயில்"],0,"தஞ்சைப் பெரிய கோயில் இராஜராஜ சோழனால் கட்டப்பட்டது."],
+        ["கீழடி அகழாய்வு எந்தப் பகுதியில் நடைபெற்றது?",["சிவகங்கை மாவட்டம்","தஞ்சாவூர் மாவட்டம்","கோயம்புத்தூர் மாவட்டம்","நீலகிரி மாவட்டம்"],0,"கீழடி சிவகங்கை மாவட்டத்தில் அமைந்துள்ளது."],
+        ["சங்க காலப் பாடல்களில் குறிப்பிடப்படும் கடற்கரை நிலம் எது?",["நெய்தல்","குறிஞ்சி","முல்லை","மருதம்"],0,"நெய்தல் திணை கடற்கரைப் பகுதியைக் குறிக்கிறது."],
+        ["பல்லவர்களின் முக்கியத் தலைநகரம் எது?",["காஞ்சிபுரம்","மதுரை","தஞ்சாவூர்","உறையூர்"],0,"காஞ்சிபுரம் பல்லவர்களின் முக்கியத் தலைநகரமாக இருந்தது."],
+        ["சோழர்களின் முக்கிய ஆற்றுப்படுகை எது?",["காவிரி","வைகை","தாமிரபரணி","பாலாறு"],0,"காவிரி ஆற்றுப்படுகை சோழ நாட்டின் வளர்ச்சிக்கு முக்கியமானது."]
+      ],
+      hard: [
+        ["தஞ்சைப் பெரிய கோயில் கட்டப்பட்ட காலம் எது?",["11ஆம் நூற்றாண்டின் தொடக்கம்","8ஆம் நூற்றாண்டு","13ஆம் நூற்றாண்டு","15ஆம் நூற்றாண்டு"],0,"பெரிய கோயில் 11ஆம் நூற்றாண்டின் தொடக்கத்தில் நிறைவு செய்யப்பட்டது."],
+        ["ராஜேந்திர சோழனின் கடல் கடந்த படையெடுப்பு எந்தப் பகுதியைச் சென்றடைந்தது?",["ஸ்ரீவிஜயம்","ரோமப் பேரரசு","எகிப்து","கிரேக்கம்"],0,"ராஜேந்திர சோழனின் கடற்படை ஸ்ரீவிஜயப் பகுதிகளுக்கு படையெடுத்தது."],
+        ["பல்லவர் காலத்தில் மாமல்லபுரத்துடன் தொடர்புடைய மன்னர் யார்?",["முதலாம் நரசிம்மவர்மன்","கரிகாலன்","நெடுஞ்செழியன்","ராஜேந்திரன்"],0,"மாமல்லன் என்ற பட்டம் பெற்ற முதலாம் நரசிம்மவர்மன் மாமல்லபுரத்துடன் தொடர்புடையவர்."],
+        ["தமிழ்-பிராமி கல்வெட்டுகள் எதற்கான சான்றுகள்?",["பழந்தமிழ் எழுத்துப் பயன்பாடு","நவீன அச்சுத் தொழில்","கணினி வளர்ச்சி","ஐரோப்பிய வணிகம்"],0,"தமிழ்-பிராமி கல்வெட்டுகள் பழந்தமிழ் எழுத்து மரபை அறிய உதவுகின்றன."],
+        ["கீழடி எந்த ஆற்றுக்கு அருகில் அமைந்துள்ளது?",["வைகை","காவிரி","பாலாறு","பெண்ணாறு"],0,"கீழடி வைகை ஆற்றுப் பள்ளத்தாக்கில் அமைந்துள்ளது."],
+        ["சங்க இலக்கியங்களில் சேர மன்னர்களைப் பற்றிய முக்கியத் தொகுப்பு எது?",["பதிற்றுப்பத்து","அகநானூறு","குறுந்தொகை","நற்றிணை"],0,"பதிற்றுப்பத்து சேர மன்னர்களைப் பற்றிய பாடல்களைக் கொண்டுள்ளது."],
+        ["உறையூர் எந்த அரச மரபின் பழைய தலைநகரமாக இருந்தது?",["சோழர்","சேரர்","பாண்டியர்","பல்லவர்"],0,"உறையூர் பழைய சோழத் தலைநகரங்களில் ஒன்று."],
+        ["களப்பிரர் காலத்தைப் பற்றிய தகவல்கள் பெரும்பாலும் எந்த வகை ஆதாரங்களில் கிடைக்கின்றன?",["இலக்கிய மற்றும் கல்வெட்டு ஆதாரங்கள்","தொலைக்காட்சி பதிவுகள்","நவீன செய்தித்தாள்கள்","வானொலி செய்திகள்"],0,"இலக்கிய மற்றும் கல்வெட்டு ஆதாரங்கள் களப்பிரர் காலத்தை ஆராய உதவுகின்றன."],
+        ["பல்லவர்களின் புகழ்பெற்ற குடைவரைக் கோயில்கள் எங்கு காணப்படுகின்றன?",["மாமல்லபுரம்","கீழடி","பூம்புகார்","கொடுமணல்"],0,"மாமல்லபுரத்தில் பல்லவர் காலக் குடைவரைக் கோயில்களும் சிற்பங்களும் உள்ளன."],
+        ["சோழர் கால உள்ளாட்சி நிர்வாகத்தை விளக்கும் புகழ்பெற்ற கல்வெட்டுகள் எங்கு உள்ளன?",["உத்திரமேரூர்","கீழடி","கொடுமணல்","ஆதிச்சநல்லூர்"],0,"உத்திரமேரூர் கல்வெட்டுகள் கிராம நிர்வாகத்தை விளக்குகின்றன."]
+      ]
+    },
+    culture: {
+      easy: [
+        ["தமிழர்களின் பாரம்பரிய வீர விளையாட்டு எது?",["சிலம்பம்","கிரிக்கெட்","டென்னிஸ்","ஹாக்கி"],0,"சிலம்பம் தமிழர்களின் பாரம்பரிய தற்காப்புக் கலை."],
+        ["பொங்கல் எந்த வகையான திருநாள்?",["அறுவடைத் திருநாள்","விளக்குத் திருநாள்","புத்தாண்டு மட்டும்","விளையாட்டுத் திருநாள்"],0,"பொங்கல் அறுவடைக்கும் உழவர்களுக்கும் நன்றி செலுத்தும் விழா."],
+        ["கரகாட்டம் எந்தக் கலையுடன் தொடர்புடையது?",["நாட்டுப்புற நடனம்","ஓவியம்","சிற்பம்","இசைக்கருவி"],0,"கரகாட்டம் தமிழ்நாட்டின் நாட்டுப்புற நடனக்கலை."],
+        ["தமிழர்களின் பாரம்பரிய இசைக்கருவி எது?",["பறை","பியானோ","கிட்டார்","வயலின்"],0,"பறை தமிழர்களின் தொன்மையான இசைக்கருவிகளில் ஒன்று."],
+        ["மாட்டுப் பொங்கல் எந்த உயிரினத்துக்கு நன்றி செலுத்தும் நாள்?",["கால்நடைகள்","மீன்கள்","பறவைகள் மட்டும்","குதிரைகள் மட்டும்"],0,"மாட்டுப் பொங்கல் உழவுக்கு உதவும் கால்நடைகளுக்கு நன்றி செலுத்தும் நாள்."],
+        ["கோலங்கள் பொதுவாக எதனால் வரையப்படுகின்றன?",["அரிசி மாவு","நிலக்கரி","எண்ணெய்","மணல் கல்"],0,"பாரம்பரியமாக கோலங்கள் அரிசி மாவால் வரையப்படுகின்றன."],
+        ["பாரதநாட்டியம் எந்த வகையைச் சேர்ந்தது?",["செவ்வியல் நடனம்","நாட்டுப்புற ஓவியம்","போர்க்கலை","நாடகம் மட்டும்"],0,"பாரதநாட்டியம் இந்தியாவின் செவ்வியல் நடன வடிவங்களில் ஒன்று."],
+        ["தமிழர் பாரம்பரிய விளையாட்டு எது?",["பல்லாங்குழி","பேஸ்பால்","ஸ்கேட்டிங்","கோல்ஃப்"],0,"பல்லாங்குழி பாரம்பரியமான தமிழ் விளையாட்டு."],
+        ["ஜல்லிக்கட்டு எந்த விலங்குடன் தொடர்புடையது?",["காளை","யானை","குதிரை","ஒட்டகம்"],0,"ஜல்லிக்கட்டு காளைகளுடன் தொடர்புடைய பாரம்பரிய நிகழ்வு."],
+        ["பொங்கல் பொதுவாக எந்த மாதத்தில் கொண்டாடப்படுகிறது?",["தை","ஆடி","ஆவணி","மார்கழி"],0,"தை மாதத்தில் பொங்கல் கொண்டாடப்படுகிறது."]
+      ],
+      medium: [
+        ["தெருக்கூத்து எந்த வகைக் கலை?",["நாட்டுப்புற நாடகக்கலை","செவ்வியல் ஓவியம்","சிற்பக்கலை","கட்டிடக்கலை"],0,"தெருக்கூத்து தமிழர்களின் நாட்டுப்புற நாடக வடிவமாகும்."],
+        ["ஒயிலாட்டம் எந்த வகையைச் சேர்ந்தது?",["நாட்டுப்புற நடனம்","இசைக்கருவி","சிற்பம்","ஓவியம்"],0,"ஒயிலாட்டம் தமிழ்நாட்டின் நாட்டுப்புற நடனக்கலை."],
+        ["பொய்க்கால் குதிரையாட்டத்தில் எது பயன்படுத்தப்படுகிறது?",["குதிரை வடிவ அலங்காரம்","முகமூடி மட்டும்","நீண்ட வாள்","மரப்படகு"],0,"குதிரை வடிவ அலங்காரத்தை அணிந்து ஆடும் நாட்டுப்புறக் கலை இது."],
+        ["வில்லுப்பாட்டு எந்தக் கருவியை மையமாகக் கொண்டது?",["வில்","பறை","யாழ்","நாதஸ்வரம்"],0,"வில்லுப்பாட்டு வில் கருவியைப் பயன்படுத்தும் கதைப்பாடல் கலை."],
+        ["பரதநாட்டியத்தில் முகபாவனைகள் எதற்கு முக்கியம்?",["அபிநயம்","வேகம் மட்டும்","உயரம்","உடை மட்டும்"],0,"அபிநயம் மூலம் உணர்வுகளும் கதையும் வெளிப்படுத்தப்படுகின்றன."],
+        ["பல்லாங்குழி விளையாட்டில் பொதுவாக எது பயன்படுத்தப்படுகிறது?",["குழிகள் மற்றும் விதைகள்","பந்து மற்றும் மட்டை","வில் மற்றும் அம்பு","கயிறு மட்டும்"],0,"பல்லாங்குழி பல குழிகளிலும் காய்களிலும் விளையாடப்படுகிறது."],
+        ["தமிழர் பாரம்பரிய உணவுகளில் ஒன்று எது?",["கேழ்வரகு கூழ்","பீட்சா","பர்கர்","நூடுல்ஸ்"],0,"கேழ்வரகு கூழ் பாரம்பரிய உணவுகளில் ஒன்று."],
+        ["சிலம்பம் பயிற்சியில் முக்கியமாகப் பயன்படுத்தப்படுவது எது?",["கம்பு","வில்","கத்தி","கயிறு"],0,"சிலம்பம் கம்பைப் பயன்படுத்தும் பாரம்பரியக் கலை."],
+        ["மதுரை எந்தப் புகழ்பெற்ற திருவிழாவுக்குப் பெயர் பெற்றது?",["சித்திரைத் திருவிழா","ஓணம்","பிஹு","லோசார்"],0,"மதுரை சித்திரைத் திருவிழாவுக்குப் புகழ்பெற்றது."],
+        ["நாதஸ்வரம் எந்த வகைக் கருவி?",["காற்றிசைக் கருவி","தோற்கருவி","நரம்புக் கருவி","தாளக் கருவி"],0,"நாதஸ்வரம் ஒரு காற்றிசைக் கருவி."]
+      ],
+      hard: [
+        ["சங்க இலக்கியத்தின் ஐந்திணைகளில் முல்லை எதைக் குறிக்கிறது?",["காடு மற்றும் மேய்ச்சல் நிலம்","மலை","கடற்கரை","வயல்"],0,"முல்லை நிலம் காடு மற்றும் மேய்ச்சல் பகுதிகளைக் குறிக்கிறது."],
+        ["பறை இசைக்கருவி எந்த வகையைச் சேர்ந்தது?",["தோற்கருவி","காற்றிசைக் கருவி","நரம்புக் கருவி","உலோகக் கருவி மட்டும்"],0,"பறை தோலால் மூடப்பட்ட சட்டகத்தில் இசைக்கப்படும் தோற்கருவி."],
+        ["தமிழ் இசையில் யாழ் எந்த வகைக் கருவி?",["நரம்பிசைக் கருவி","காற்றிசைக் கருவி","தோற்கருவி","உலோகத் தாளக்கருவி"],0,"யாழ் நரம்புகளைக் கொண்டு இசைக்கப்படும் கருவி."],
+        ["குறவஞ்சி எந்த இலக்கிய மற்றும் நாடக வடிவத்துடன் தொடர்புடையது?",["நாட்டிய நாடக இலக்கியம்","அறிவியல் ஆய்வு","போர் வரலாறு","கணித நூல்"],0,"குறவஞ்சி இசை, நடனம், நாடகம் கலந்த இலக்கிய வடிவம்."],
+        ["தமிழகத்தின் பாரம்பரியத் துணி நெசவுக்கு புகழ்பெற்ற ஊர் எது?",["காஞ்சிபுரம்","ஊட்டி","கொடைக்கானல்","கன்னியாகுமரி"],0,"காஞ்சிபுரம் பட்டுப் புடவைகளுக்குப் புகழ்பெற்றது."],
+        ["சதிர் என்ற பழைய நடன வடிவம் எதனுடன் தொடர்புடையது?",["பாரதநாட்டியம்","ஒயிலாட்டம்","கரகாட்டம்","காவடியாட்டம்"],0,"சதிர் பாரதநாட்டியத்தின் வரலாற்று முன்னோடி வடிவமாகக் கருதப்படுகிறது."],
+        ["காவடியாட்டம் எந்த வழிபாட்டு மரபுடன் நெருங்கிய தொடர்புடையது?",["முருக வழிபாடு","சிவன் வழிபாடு மட்டும்","விஷ்ணு வழிபாடு மட்டும்","இந்திர வழிபாடு"],0,"காவடி முருக வழிபாட்டுடன் நெருங்கிய தொடர்புடையது."],
+        ["தமிழர் பாரம்பரிய உணவில் கம்பு எதற்காகப் பயன்படுத்தப்படுகிறது?",["உணவுத் தானியமாக","நிறமூட்டியாக","மருந்துக் கருவியாக மட்டும்","இசைக்கருவியாக"],0,"கம்பு ஒரு சிறுதானியம்; உணவாகப் பயன்படுத்தப்படுகிறது."],
+        ["கோலம் வரையும் மரபின் ஒரு முக்கிய நோக்கம் எது?",["அலங்காரம் மற்றும் வரவேற்பு","போர் பயிற்சி","கட்டிட அளவீடு","நாணயம் தயாரித்தல்"],0,"கோலம் வீட்டு வாசலை அலங்கரிக்கும் வரவேற்பு மரபு."],
+        ["கும்மி எந்த வகைக் கலை?",["குழுவாக ஆடும் நாட்டுப்புற நடனம்","தனிநபர் சிற்பம்","காற்றிசைக் கலை","போர் விளையாட்டு"],0,"கும்மி குழுவாகப் பாடி ஆடும் நாட்டுப்புற நடனம்."]
+      ]
+    },
+    language: {
+      easy: [
+        ["தமிழில் உயிரெழுத்துகள் எத்தனை?",["12","18","216","247"],0,"தமிழில் 12 உயிரெழுத்துகள் உள்ளன."],
+        ["தமிழில் மெய்யெழுத்துகள் எத்தனை?",["18","12","30","216"],0,"தமிழில் 18 மெய்யெழுத்துகள் உள்ளன."],
+        ["உயிர்மெய்யெழுத்துகள் எத்தனை?",["216","247","18","12"],0,"12 உயிர் × 18 மெய் = 216 உயிர்மெய் எழுத்துகள்."],
+        ["தமிழ் ஆய்த எழுத்து எது?",["ஃ","அ","க்","ஔ"],0,"ஃ என்பது ஆய்த எழுத்து."],
+        ["தமிழில் மொத்த அடிப்படை எழுத்துகள் எத்தனை?",["247","216","30","250"],0,"12 + 18 + 216 + 1 = 247."],
+        ["தமிழ் உயிரெழுத்துகளில் குறில் எழுத்துகள் எத்தனை?",["5","7","12","18"],0,"அ, இ, உ, எ, ஒ ஆகியவை ஐந்து குறில் எழுத்துகள்."],
+        ["தமிழ் உயிரெழுத்துகளில் நெடில் எழுத்துகள் எத்தனை?",["7","5","12","18"],0,"ஆ, ஈ, ஊ, ஏ, ஐ, ஓ, ஔ ஆகியவை ஏழு நெடில் எழுத்துகள்."],
+        ["முதல் மெய்யெழுத்து எது?",["க்","ங்","ச்","ஞ்"],0,"மெய்யெழுத்து வரிசை க் என்று தொடங்குகிறது."],
+        ["தமிழ் நெடுங்கணக்கில் முதல் எழுத்து எது?",["அ","ஆ","இ","ஈ"],0,"தமிழ் எழுத்து வரிசை அ என்று தொடங்குகிறது."],
+        ["'மரம்' என்பது எந்தச் சொல் வகை?",["பெயர்ச்சொல்","வினைச்சொல்","இடைச்சொல்","உரிச்சொல்"],0,"மரம் ஒரு பொருளைக் குறிக்கும் பெயர்ச்சொல்."]
+      ],
+      medium: [
+        ["தமிழில் வல்லின எழுத்துகள் எத்தனை?",["6","5","7","18"],0,"க், ச், ட், த், ப், ற் ஆகிய ஆறு வல்லினங்கள்."],
+        ["மெல்லின எழுத்துகள் எத்தனை?",["6","5","7","12"],0,"ங், ஞ், ண், ந், ம், ன் ஆகிய ஆறு மெல்லினங்கள்."],
+        ["இடையின எழுத்துகள் எத்தனை?",["6","5","7","18"],0,"ய், ர், ல், வ், ழ், ள் ஆகிய ஆறு இடையினங்கள்."],
+        ["'ஓடினான்' என்பது எந்தச் சொல் வகை?",["வினைச்சொல்","பெயர்ச்சொல்","இடைச்சொல்","உரிச்சொல்"],0,"ஓடினான் ஒரு செயலைக் குறிக்கும் வினைச்சொல்."],
+        ["'அழகான மலர்' என்ற தொடரில் 'அழகான' எதைக் குறிக்கிறது?",["உரிச்சொல்","வினைச்சொல்","பெயர்ச்சொல்","இடைச்சொல்"],0,"அழகான என்பது மலரின் பண்பை விளக்கும் உரிச்சொல்."],
+        ["'மாணவன் படித்தான்' என்ற வாக்கியத்தில் வினைச்சொல் எது?",["படித்தான்","மாணவன்","என்ற","இல்லை"],0,"படித்தான் என்பது செயலைக் குறிக்கும் வினைச்சொல்."],
+        ["தமிழில் முதல் உயிர்மெய் எழுத்து எது?",["க","ங","ச","ட"],0,"உயிர்மெய் எழுத்து வரிசையில் க முதல் எழுத்தாகும்."],
+        ["'ஐ' என்பது எந்த வகை எழுத்து?",["நெடில்","குறில்","மெய்","ஆய்தம்"],0,"ஐ ஒரு நெடில் உயிரெழுத்து."],
+        ["'கல்' என்ற சொல்லின் பன்மை எது?",["கற்கள்","கல்லை","கல்லின்","கல்லால்"],0,"கல் என்பதன் பன்மை கற்கள்."],
+        ["'அவன்' என்பது எந்தப் பால்?",["ஆண்பால்","பெண்பால்","பலர்பால்","ஒன்றன்பால்"],0,"அவன் என்பது ஆண்பால் ஒருமை."]
+      ],
+      hard: [
+        ["தொல்காப்பியத்தில் எழுத்ததிகாரத்தில் எத்தனை இயல்கள் உள்ளன?",["9","5","10","12"],0,"எழுத்ததிகாரத்தில் ஒன்பது இயல்கள் உள்ளன."],
+        ["தமிழில் சார்பெழுத்துகளின் எண்ணிக்கை மரபுவழிப் பட்டியலில் எத்தனை?",["10","5","12","18"],0,"தமிழ் இலக்கண மரபில் சார்பெழுத்துகள் பத்து வகைப்படும்."],
+        ["'குற்றியலுகரம்' எந்த எழுத்துடன் தொடர்புடையது?",["உகரம்","அகரம்","இகரம்","ஐகாரம்"],0,"குறுகிய ஒலியுடன் ஒலிக்கும் உகரம் குற்றியலுகரம்."],
+        ["'அவன் வந்தான்' என்ற வாக்கியத்தில் எழுவாய் எது?",["அவன்","வந்தான்","வந்த","இல்லை"],0,"செயலைச் செய்பவரைக் குறிக்கும் எழுவாய் அவன்."],
+        ["'மலர்கள் மலர்ந்தன' என்ற வாக்கியத்தில் பயனிலை எது?",["மலர்ந்தன","மலர்கள்","மலர்","இல்லை"],0,"வாக்கியத்தின் பயனிலையாக மலர்ந்தன வருகிறது."],
+        ["தமிழில் உயிரளபெடை எதனுடன் தொடர்புடையது?",["உயிரெழுத்தின் நீட்டிய ஒலி","மெய்யெழுத்து நீக்கம்","சொல் பிரிப்பு","புணர்ச்சி மட்டும்"],0,"உயிரெழுத்தின் இயல்பான அளவை விட நீண்டு ஒலிப்பது உயிரளபெடை."],
+        ["'பொன் போன்ற முகம்' என்ற தொடரில் இடம்பெறும் அணி எது?",["உவமை அணி","உருவக அணி","வேற்றுமை அணி","தற்குறிப்பேற்ற அணி"],0,"போன்ற என்ற ஒப்புமைச் சொல் உவமை அணியைக் காட்டுகிறது."],
+        ["'தமிழ் இனிமையான மொழி' என்ற வாக்கியத்தில் எழுவாய் எது?",["தமிழ்","இனிமையான","மொழி","இல்லை"],0,"தமிழ் என்பது வாக்கியத்தின் எழுவாய்."],
+        ["ஒரு பெயர்ச்சொல் எதைக் குறிக்கலாம்?",["பொருள், இடம் அல்லது நபர்","செயல் மட்டும்","பண்பு மட்டும்","இணைப்புச் சொல் மட்டும்"],0,"பெயர்ச்சொல் பொருள், இடம், நபர் போன்றவற்றைக் குறிக்கும்."],
+        ["'ஓடி' என்பது எந்த வகை வினை வடிவம்?",["வினையெச்சம்","பெயரெச்சம்","பெயர்ச்சொல்","இடைச்சொல்"],0,"ஓடி என்பது வினையெச்ச வடிவமாகும்."]
+      ]
     }
+  };
 
-    document.getElementById("heritagePopup").addEventListener("click", event => {
-      if (event.target.id === "heritagePopup") closeHeritage();
+  const names = {
+    literature:"தமிழ் இலக்கியம்",
+    kural:"திருக்குறள்",
+    history:"தமிழ் வரலாறு",
+    culture:"தமிழ் பண்பாடு",
+    language:"தமிழ் மொழி"
+  };
+
+  let category = "literature";
+  let level = "easy";
+  let current = 0;
+  let score = 0;
+  let selectedQuestions = [];
+  let answered = false;
+  let finalScore = 0;
+
+  const $ = id => document.getElementById(id);
+  const show = id => $(id).classList.remove("quiz-hidden");
+  const hide = id => $(id).classList.add("quiz-hidden");
+
+  root.querySelectorAll(".category-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      category = btn.dataset.cat;
+      root.querySelectorAll(".category-btn").forEach(b =>
+        b.classList.toggle("active", b === btn)
+      );
     });
-
-    function doSearch() {
-      const input = document.getElementById("prideSearch");
-      const results = document.getElementById("searchResults");
-      const query = input.value.trim();
-
-      if (!query) {
-        results.textContent = "தயவுசெய்து ஒரு தலைப்பை உள்ளிடுங்கள்.";
-        input.focus();
-        return;
-      }
-
-      const encoded = encodeURIComponent(query);
-      results.innerHTML =
-        'இதற்கான தேடல் இணைப்புகள்: ' +
-        '<a href="https://www.google.com/search?q=' + encoded + '" target="_blank" rel="noopener noreferrer">Google-ல் தேடுங்கள்</a>' +
-        ' | ' +
-        '<a href="https://ta.wikipedia.org/w/index.php?search=' + encoded + '" target="_blank" rel="noopener noreferrer">தமிழ் விக்கிப்பீடியாவில் தேடுங்கள்</a>';
-    }
-
-    document.getElementById("searchBtn").addEventListener("click", doSearch);
-    document.getElementById("prideSearch").addEventListener("keydown", event => {
-      if (event.key === "Enter") doSearch();
-    });
-
-async function loadDailyKural() {
-  const numberElement = document.getElementById("kural-number");
-  const chapterElement = document.getElementById("kural-chapter");
-  const textElement = document.getElementById("kural-text");
-  const meaningElement = document.getElementById("kural-meaning");
-  const paalElement = document.getElementById("kural-paal");
-  const dateElement = document.getElementById("kural-date");
-
-  dateElement.textContent = new Date().toLocaleDateString("ta-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric"
   });
 
-  try {
-    // தினமும் அடுத்த குறள்; 1330 முடிந்ததும் மீண்டும் 1
-    const today = new Date();
-    const todayUTC = Date.UTC(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    );
+  function shuffle(arr) {
+    const copy = [...arr];
+    for(let i=copy.length-1;i>0;i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [copy[i],copy[j]] = [copy[j],copy[i]];
+    }
+    return copy;
+  }
 
-    const startDate = Date.UTC(2026, 0, 1);
-    const daysPassed = Math.floor(
-      (todayUTC - startDate) / 86400000
-    );
+  function startQuiz() {
+    level = $("ti-level").value;
+    selectedQuestions = shuffle(questions[category][level]);
+    current = 0;
+    score = 0;
+    hide("ti-home");
+    hide("ti-result");
+    show("ti-game");
+    renderQuestion();
+  }
 
-    const kuralNumber =
-      ((daysPassed % 1330) + 1330) % 1330 + 1;
+  function renderQuestion() {
+    answered = false;
+    const q = selectedQuestions[current];
+    $("ti-category-name").textContent = names[category];
+    $("ti-counter").textContent = `${current+1} / 10`;
+    $("ti-progress").style.width = `${current*10}%`;
+    $("ti-question").textContent = q[0];
+    $("ti-options").innerHTML = "";
+    hide("ti-feedback");
+    hide("ti-next");
 
-    const response = await fetch(
-      `https://kural.codewithram.dev/api/kural/${kuralNumber}`
-    );
+    const options = q[1].map((label,index)=>({
+      label,
+      correct:index===q[2]
+    }));
 
-    if (!response.ok) {
-      throw new Error("Kural API unavailable");
+    shuffle(options).forEach(option => {
+      const btn = document.createElement("button");
+      btn.className = "quiz-option";
+      btn.textContent = option.label;
+      btn.addEventListener("click",()=>chooseAnswer(btn,option.correct,q[3]));
+      $("ti-options").appendChild(btn);
+    });
+  }
+
+  function chooseAnswer(button,isCorrect,explanation) {
+    if(answered) return;
+    answered = true;
+    if(isCorrect) score++;
+
+    root.querySelectorAll(".quiz-option").forEach(btn=>{
+      btn.disabled = true;
+      if(btn===button) {
+        btn.classList.add(isCorrect?"correct":"wrong");
+      }
+    });
+
+    $("ti-feedback").textContent =
+      (isCorrect?"✅ சரியான பதில்! ":"❌ தவறான பதில். ") + explanation;
+    show("ti-feedback");
+
+    $("ti-next").textContent =
+      current===9?"View Results 🏆":"Next Question →";
+    show("ti-next");
+  }
+
+  function finishQuiz() {
+    finalScore = score;
+    hide("ti-game");
+    show("ti-result");
+    $("ti-score").textContent = `${score}/10`;
+    $("ti-message").textContent =
+      score===10?"அற்புதம்! தமிழ் அறிவுச் செல்வன்!":
+      score>=7?"மிகவும் சிறப்பு! தொடர்ந்து கற்றுக்கொள்ளுங்கள்!":
+      score>=4?"நல்ல முயற்சி! இன்னும் பயிற்சி செய்யுங்கள்!":
+      "மீண்டும் முயற்சி செய்யுங்கள்!";
+    $("ti-detail").textContent =
+      `நீங்கள் ${names[category]} பிரிவில் ${score} மதிப்பெண்கள் பெற்றுள்ளீர்கள்.`;
+    $("ti-progress").style.width="100%";
+  }
+
+  function getScores() {
+    try {
+      return JSON.parse(localStorage.getItem("tiQuizScores")||"[]");
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function renderLeaderboard() {
+    const scores = getScores().sort((a,b)=>b.score-a.score).slice(0,10);
+    const box = $("ti-leaderboard");
+    box.innerHTML = "";
+
+    if(!scores.length) {
+      box.textContent="Be the first Tamil Quiz Champion!";
+      return;
     }
 
-    const data = await response.json();
+    const table=document.createElement("table");
+    const head=document.createElement("tr");
+    ["Rank","Player","Category","Score"].forEach(t=>{
+      const th=document.createElement("th");
+      th.textContent=t;
+      head.appendChild(th);
+    });
+    table.appendChild(head);
 
-    numberElement.textContent = "குறள் எண்: " + data.number;
-    chapterElement.textContent =
-      data.chapter.names.ta || "திருக்குறள்";
-
-    textElement.textContent =
-      data.kural.join("\n");
-
-    meaningElement.textContent =
-      data.meaning.ta_mu_va || "பொருள் கிடைக்கவில்லை.";
-
-    paalElement.textContent =
-      "பால்: " + data.section.names.ta;
-
-  } catch (error) {
-    numberElement.textContent = "குறள் ஏற்றப்படவில்லை";
-    chapterElement.textContent = "மீண்டும் முயற்சிக்கவும்";
-    textElement.textContent =
-      "இணைய இணைப்பைச் சரிபார்க்கவும்.";
-    meaningElement.textContent = "";
-    paalElement.textContent = "";
-    console.error(error);
+    scores.forEach((item,i)=>{
+      const tr=document.createElement("tr");
+      [i===0?"🥇":i===1?"🥈":i===2?"🥉":i+1,
+       item.name,item.category,`${item.score}/10`].forEach(value=>{
+        const td=document.createElement("td");
+        td.textContent=value;
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    });
+    box.appendChild(table);
   }
-}
 
-loadDailyKural();
+  $("ti-start").addEventListener("click",startQuiz);
 
-  </script>
-</body>
-</html>
+  $("ti-next").addEventListener("click",()=>{
+    if(current===9) finishQuiz();
+    else {
+      current++;
+      renderQuestion();
+    }
+  });
 
+  $("ti-save").addEventListener("click",()=>{
+    const name=$("ti-player").value.trim().slice(0,20);
+    if(!name) {
+      alert("Please enter your name!");
+      return;
+    }
+
+    const scores=getScores();
+    scores.push({
+      name,
+      score:finalScore,
+      category:names[category],
+      date:new Date().toISOString()
+    });
+
+    try {
+      localStorage.setItem("tiQuizScores",JSON.stringify(scores.slice(-100)));
+      $("ti-save").textContent="Score Saved ✓";
+      $("ti-save").disabled=true;
+      renderLeaderboard();
+    } catch(e) {
+      alert("Unable to save score in this browser.");
+    }
+  });
+
+  $("ti-again").addEventListener("click",()=>{
+    hide("ti-result");
+    show("ti-home");
+    $("ti-save").disabled=false;
+    $("ti-save").textContent="Save Score 🏆";
+    $("ti-player").value="";
+  });
+
+  renderLeaderboard();
+})();
+</script>
