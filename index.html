@@ -755,29 +755,235 @@
       if (event.target.id === "heritagePopup") closeHeritage();
     });
 
-    function doSearch() {
-      const input = document.getElementById("prideSearch");
-      const results = document.getElementById("searchResults");
-      const query = input.value.trim();
+  
+// ======================================
+// NANAL TAMIL - DUAL SEARCH ENGINE
+// Internal Search + Google + Wikipedia
+// ======================================
 
-      if (!query) {
-        results.textContent = "தயவுசெய்து ஒரு தலைப்பை உள்ளிடுங்கள்.";
-        input.focus();
-        return;
-      }
+const searchTopics = [
 
-      const encoded = encodeURIComponent(query);
-      results.innerHTML =
-        'இதற்கான தேடல் இணைப்புகள்: ' +
-        '<a href="https://www.google.com/search?q=' + encoded + '" target="_blank" rel="noopener noreferrer">Google-ல் தேடுங்கள்</a>' +
-        ' | ' +
-        '<a href="https://ta.wikipedia.org/w/index.php?search=' + encoded + '" target="_blank" rel="noopener noreferrer">தமிழ் விக்கிப்பீடியாவில் தேடுங்கள்</a>';
-    }
+  {
+    title: "திருக்குறள்",
+    description: "திருவள்ளுவர் எழுதிய உலகப் புகழ்பெற்ற அறநூலைப் பற்றி அறியுங்கள்.",
+    keywords: "திருக்குறள் திருவள்ளுவர் kural thirukkural",
+    link: "#pride"
+  },
 
-    document.getElementById("searchBtn").addEventListener("click", doSearch);
-    document.getElementById("prideSearch").addEventListener("keydown", event => {
-      if (event.key === "Enter") doSearch();
+  {
+    title: "தமிழ் எழுத்துக்கள்",
+    description: "தமிழ் எழுத்துகள் மற்றும் அவற்றின் அடிப்படைகளை கற்கலாம்.",
+    keywords: "தமிழ் எழுத்துக்கள் உயிர் மெய் உயிர்மெய் letters alphabet",
+    link: "#learn"
+  },
+
+  {
+    title: "சங்க இலக்கியம்",
+    description: "பண்டைய தமிழ் இலக்கிய மரபுகளைப் பற்றி அறிந்துகொள்ளுங்கள்.",
+    keywords: "சங்க இலக்கியம் சங்க காலம் sangam literature",
+    link: "#about"
+  },
+
+  {
+    title: "தமிழ் வரலாறு",
+    description: "தமிழ் மொழியின் வரலாறு மற்றும் வளர்ச்சியை அறியுங்கள்.",
+    keywords: "தமிழ் வரலாறு tamil history language",
+    link: "#about"
+  },
+
+  {
+    title: "பல்லாங்குழி",
+    description: "பாரம்பரியத் தமிழர் விளையாட்டைப் பற்றி தெரிந்துகொள்ளுங்கள்.",
+    keywords: "பல்லாங்குழி pallanguzhi game",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "சிலம்பம்",
+    description: "தமிழர்களின் பாரம்பரிய தற்காப்புக் கலையை அறியுங்கள்.",
+    keywords: "சிலம்பம் silambam martial art",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "கபடி",
+    description: "தமிழர் விளையாட்டு மரபுகளில் ஒன்றான கபடியைப் பற்றி அறியுங்கள்.",
+    keywords: "கபடி kabaddi sport",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "பரதநாட்டியம்",
+    description: "தமிழகத்தின் பாரம்பரிய நடனக் கலையைப் பற்றி அறியுங்கள்.",
+    keywords: "பரதநாட்டியம் bharatanatyam dance",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "கரகாட்டம்",
+    description: "தமிழர் நாட்டுப்புற நடனக் கலையைப் பற்றி அறியுங்கள்.",
+    keywords: "கரகாட்டம் karagattam folk dance",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "ஒயிலாட்டம்",
+    description: "தமிழர்களின் பாரம்பரியக் குழு நடனத்தை அறியுங்கள்.",
+    keywords: "ஒயிலாட்டம் oyilattam dance",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "தெருக்கூத்து",
+    description: "தமிழர் பாரம்பரிய நாடகக் கலையைப் பற்றி அறியுங்கள்.",
+    keywords: "தெருக்கூத்து therukoothu drama",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "தமிழ் பண்பாடு",
+    description: "தமிழர் கலை, மரபு மற்றும் பண்பாட்டை அறிந்துகொள்ளுங்கள்.",
+    keywords: "தமிழ் பண்பாடு culture tradition tamil heritage",
+    link: "#tamil-heritage"
+  },
+
+  {
+    title: "தமிழைக் கற்போம்",
+    description: "தமிழ் மொழியைக் கற்கும் அடிப்படைப் பகுதி.",
+    keywords: "தமிழ் கற்போம் learn tamil learning",
+    link: "#learn"
+  }
+
+];
+
+// SEARCH FUNCTION
+
+function doSearch() {
+
+  const input = document.getElementById("prideSearch");
+  const results = document.getElementById("searchResults");
+
+  const query = input.value.trim().normalize("NFC").toLowerCase();
+
+  if (!query) {
+    results.textContent = "தயவுசெய்து ஒரு தலைப்பை உள்ளிடுங்கள்.";
+    input.focus();
+    return;
+  }
+
+  const terms = query.split(/\s+/).filter(Boolean);
+
+  // Find matching internal topics
+
+  const matches = searchTopics
+    .map(topic => {
+
+      const searchableText =
+        (topic.title + " " + topic.keywords + " " +
+        topic.description).normalize("NFC").toLowerCase();
+
+      const score = terms.reduce((total, term) => {
+        return total + (searchableText.includes(term) ? 1 : 0);
+      }, 0);
+
+      return { ...topic, score };
+
+    })
+    .filter(topic => topic.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  // Clear previous results
+
+  results.replaceChildren();
+
+  // Heading
+
+  const heading = document.createElement("h3");
+  heading.textContent = "📚 உங்கள் தேடல் முடிவுகள்";
+  heading.style.color = "#176b45";
+  heading.style.marginBottom = "12px";
+
+  results.appendChild(heading);
+
+  // Internal results
+
+  if (matches.length > 0) {
+
+    const list = document.createElement("div");
+    list.className = "search-result-list";
+
+    matches.forEach(topic => {
+
+      const card = document.createElement("article");
+      card.className = "search-result-card";
+
+      const title = document.createElement("h3");
+      title.textContent = topic.title;
+
+      const description = document.createElement("p");
+      description.textContent = topic.description;
+
+      const link = document.createElement("a");
+      link.href = topic.link;
+      link.textContent = "மேலும் படிக்க →";
+
+      card.append(title, description, link);
+      list.appendChild(card);
+
     });
+
+    results.appendChild(list);
+
+  } else {
+
+    const message = document.createElement("p");
+    message.className = "search-message";
+    message.textContent =
+      "இந்த தலைப்பிற்கான உள்தள முடிவுகள் இல்லை. வெளிப்புறத் தேடலை முயற்சிக்கவும்.";
+
+    results.appendChild(message);
+
+  }
+
+  // External search buttons
+
+  const actions = document.createElement("div");
+  actions.className = "search-actions";
+
+  const google = document.createElement("a");
+  google.href =
+    "https://www.google.com/search?q=" + encodeURIComponent(query);
+  google.target = "_blank";
+  google.rel = "noopener noreferrer";
+  google.textContent = "🔎 Google-ல் தேடுங்கள்";
+
+  const wikipedia = document.createElement("a");
+  wikipedia.href =
+    "https://ta.wikipedia.org/w/index.php?search=" +
+    encodeURIComponent(query);
+  wikipedia.target = "_blank";
+  wikipedia.rel = "noopener noreferrer";
+  wikipedia.textContent = "📖 தமிழ் விக்கிப்பீடியா";
+
+  actions.append(google, wikipedia);
+  results.appendChild(actions);
+
+}
+
+// BUTTON CLICK
+
+document.getElementById("searchBtn")
+  .addEventListener("click", doSearch);
+
+// ENTER KEY
+
+document.getElementById("prideSearch")
+  .addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      doSearch();
+    }
+  });
+
 
 async function loadDailyKural() {
   const numberElement = document.getElementById("kural-number");
