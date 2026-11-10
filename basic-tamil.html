@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>அடிப்படை தமிழ் கற்போம் | Tamilal Inaivom</title>
+
+<meta name="description" content="Learn Tamil letters, words and pronunciation through Tamilal Inaivom.">
+
+<style>
+:root {
+  --green: #087443;
+  --dark: #123d2b;
+  --gold: #d9a62e;
+  --cream: #fffdf5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans Tamil", "Latha", sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+header {
+  background: linear-gradient(135deg, #075b36, #087443);
+  color: white;
+  text-align: center;
+  padding: 35px 15px;
+  border-bottom: 5px solid var(--gold);
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+  color: #ffdc75;
+}
+
+header h1 {
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+header p {
+  font-size: 15px;
+}
+
+.home-btn {
+  display: inline-block;
+  margin-top: 18px;
+  background: var(--gold);
+  color: #183b29;
+  padding: 10px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 25px 16px;
+}
+
+.intro {
+  text-align: center;
+  padding: 25px 10px;
+}
+
+.intro h2 {
+  color: var(--green);
+  font-size: 26px;
+}
+
+.intro p {
+  margin-top: 8px;
+}
+
+.section-title {
+  text-align: center;
+  color: var(--green);
+  font-size: 25px;
+  margin: 35px 0 18px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.letter {
+  background: white;
+  border: 1px solid #e6e3d4;
+  border-bottom: 4px solid var(--gold);
+  border-radius: 12px;
+  padding: 15px 5px;
+  text-align: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.letter:hover {
+  background: #e8f6ed;
+  transform: translateY(-3px);
+}
+
+.letter small {
+  display: block;
+  font-size: 11px;
+  color: #777;
+}
+
+.info {
+  background: #e8f5ec;
+  border-left: 5px solid var(--green);
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.action-btn {
+  background: var(--green);
+  color: white;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 8px 4px;
+}
+
+.action-btn:hover {
+  background: var(--dark);
+}
+
+.words {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 15px;
+}
+
+.word-card {
+  background: white;
+  padding: 18px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #e6e3d4;
+}
+
+.word-card h3 {
+  color: var(--green);
+  font-size: 27px;
+}
+
+.word-card p {
+  color: #777;
+}
+
+.quiz-box {
+  background: white;
+  border: 2px solid var(--gold);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.quiz-options button {
+  background: #e8f5ec;
+  color: var(--dark);
+  padding: 13px;
+  border: 1px solid var(--green);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.quiz-options button:hover {
+  background: #ccebd7;
+}
+
+#feedback {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 25px 10px;
+  margin-top: 45px;
+}
+
+footer span {
+  color: var(--gold);
+}
+
+@media(max-width:600px) {
+  header h1 {
+    font-size: 25px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .letter {
+    font-size: 27px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">தமிழால் இணைவோம்</div>
+
+  <h1>அடிப்படை தமிழ் கற்போம்</h1>
+
+  <p>Learn Tamil • Explore Tamil • Love Tamil</p>
+
+  <a href="index.html" class="home-btn">⌂ முகப்புப் பக்கம்</a>
+</header>
+
+<main class="container">
+
+<section class="intro">
+  <h2>வணக்கம்! தமிழ் கற்கத் தயாரா?</h2>
+
+  <p>
+    தமிழ் மொழியின் அடிப்படைகளை எளிமையாகக் கற்போம்.
+    எழுத்துக்கள், சொற்கள், உச்சரிப்பு மற்றும் வினாடி வினா
+    மூலம் தமிழை கற்றுக்கொள்ளுங்கள்.
+  </p>
+</section>
+
+<!-- UYIR LETTERS -->
+
+<h2 class="section-title">🌸 உயிர் எழுத்துக்கள் (12)</h2>
+
+<div class="cards" id="uyir"></div>
+
+<div class="info">
+  <b>உயிர் எழுத்துக்கள்</b>
+  <p>தமிழில் 12 உயிர் எழுத்துக்கள் உள்ளன.</p>
+  <p>ஒவ்வொரு எழுத்தையும் அழுத்தி அதன் ஒலியைக் கேளுங்கள்.</p>
+</div>
+
+<!-- MEI LETTERS -->
+
+<h2 class="section-title">🌿 மெய் எழுத்துக்கள் (18)</h2>
+
+<div class="cards" id="mei"></div>
+
+<div class="info">
+  <b>மெய் எழுத்துக்கள்</b>
+  <p>தமிழில் 18 மெய் எழுத்துக்கள் உள்ளன.</p>
+</div>
+
+<!-- UYIRMEI -->
+
+<h2 class="section-title">🌺 உயிர்மெய் எழுத்துக்கள் (216)</h2>
+
+<p style="text-align:center;margin-bottom:15px">
+  ஒரு மெய் எழுத்தைத் தேர்ந்தெடுத்து அதன் உயிர்மெய் எழுத்துக்களைக் கற்கவும்.
+</p>
+
+<div class="cards" id="meiSelect"></div>
+
+<div class="cards" id="uyirmei" style="margin-top:20px"></div>
+
+<!-- WORDS -->
+
+<h2 class="section-title">📚 அடிப்படை தமிழ் சொற்கள்</h2>
+
+<div class="words">
+
+  <div class="word-card">
+    <h3>அம்மா</h3>
+    <p>Mother</p>
+    <button class="action-btn" onclick="speak('அம்மா')">🔊 கேட்க</button>
+  </div>
+
+  <div class="word-card">
+    <h3>அப்பா</h3>
+    <p>Father</p>
+    <button class="action-btn" onclick="speak('அப்பா')">🔊 கேட்க</button>
+  </div>
+
+  <div class="word-card">
+    <h3>நன்றி</h3>
+    <p>Thank you</p>
+    <button class="action-btn" onclick="speak('நன்றி')">🔊 கேட்க</button>
+  </div>
+
+  <div class="word-card">
+    <h3>வணக்கம்</h3>
+    <p>Hello / Greetings</p>
+    <button class="action-btn" onclick="speak('வணக்கம்')">🔊 கேட்க</button>
+  </div>
+
+  <div class="word-card">
+    <h3>நீர்</h3>
+    <p>Water</p>
+    <button class="action-btn" onclick="speak('நீர்')">🔊 கேட்க</button>
+  </div>
+
+  <div class="word-card">
+    <h3>புத்தகம்</h3>
+    <p>Book</p>
+    <button class="action-btn" onclick="speak('புத்தகம்')">🔊 கேட்க</button>
+  </div>
+
+</div>
+
+<!-- QUIZ -->
+
+<h2 class="section-title">🏆 தமிழ் கற்றல் வினாடி வினா</h2>
+
+<div class="quiz-box">
+
+  <h3 id="question">தமிழில் எத்தனை உயிர் எழுத்துக்கள் உள்ளன?</h3>
+
+  <div class="quiz-options" id="options"></div>
+
+  <p id="feedback"></p>
+
+  <p id="score" style="margin-top:12px">
+    மதிப்பெண்: 0
+  </p>
+
+  <button class="action-btn" onclick="nextQuestion()">
+    அடுத்த கேள்வி →
+  </button>
+
+</div>
+
+</main>
+
+<footer>
+  <p>தமிழால் இணைவோம் | <span>Tamilal Inaivom</span></p>
+  <p>தமிழைக் கற்போம்! தமிழால் இணைவோம்!</p>
+  <p>© 2026 Tamilal Inaivom</p>
+</footer>
+
+<script>
+
+// LETTER DATA
+
+const uyirLetters = [
+  "அ","ஆ","இ","ஈ","உ","ஊ",
+  "எ","ஏ","ஐ","ஒ","ஓ","ஔ"
+];
+
+const meiLetters = [
+  "க்","ங்","ச்","ஞ்","ட்","ண்",
+  "த்","ந்","ப்","ம்","ய்","ர்",
+  "ல்","வ்","ழ்","ள்","ற்","ன்"
+];
+
+// UYIR LETTER DISPLAY
+
+function createLetters(id, letters) {
+
+  const area = document.getElementById(id);
+
+  letters.forEach(letter => {
+
+    const card = document.createElement("div");
+
+    card.className = "letter";
+
+    card.innerHTML = `
+      ${letter}
+      <small>🔊 கேட்க</small>
+    `;
+
+    card.onclick = () => speak(letter);
+
+    area.appendChild(card);
+
+  });
+}
+
+createLetters("uyir", uyirLetters);
+createLetters("mei", meiLetters);
+
+// UYIRMEI LETTER GENERATION
+
+const vowelSigns = [
+  "", "ா", "ி", "ீ", "ு", "ூ",
+  "ெ", "ே", "ை", "ொ", "ோ", "ௌ"
+];
+
+const meiArea = document.getElementById("meiSelect");
+
+let selectedMei = "க்";
+
+meiLetters.forEach(letter => {
+
+  const btn = document.createElement("button");
+
+  btn.className = "action-btn";
+  btn.textContent = letter;
+
+  btn.onclick = () => {
+
+    selectedMei = letter;
+
+    showUyirmei();
+
+  };
+
+  meiArea.appendChild(btn);
+
+});
+
+function showUyirmei() {
+
+  const area = document.getElementById("uyirmei");
+
+  area.innerHTML = "";
+
+  const base = selectedMei.replace("்", "");
+
+  vowelSigns.forEach(sign => {
+
+    const letter = base + sign;
+
+    const card = document.createElement("div");
+
+    card.className = "letter";
+
+    card.innerHTML = `${letter}<small>🔊 கேட்க</small>`;
+
+    card.onclick = () => speak(letter);
+
+    area.appendChild(card);
+
+  });
+
+}
+
+showUyirmei();
+
+// TAMIL SPEECH
+
+function speak(word) {
+
+  if (!("speechSynthesis" in window)) {
+    alert("இந்த உலாவியில் குரல் வசதி இல்லை.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const speech = new SpeechSynthesisUtterance(word);
+
+  speech.lang = "ta-IN";
+  speech.rate = 0.75;
+
+  speechSynthesis.speak(speech);
+
+}
+
+// QUIZ DATA
+
+const questions = [
+
+  {
+    q: "தமிழில் எத்தனை உயிர் எழுத்துக்கள் உள்ளன?",
+    a: ["10","12","18","216"],
+    correct: "12"
+  },
+
+  {
+    q: "மெய் எழுத்துக்கள் எத்தனை?",
+    a: ["12","18","30","216"],
+    correct: "18"
+  },
+
+  {
+    q: "தமிழில் மொத்த உயிர்மெய் எழுத்துக்கள் எத்தனை?",
+    a: ["12","18","216","247"],
+    correct: "216"
+  },
+
+  {
+    q: "தமிழின் முதல் உயிர் எழுத்து எது?",
+    a: ["ஆ","இ","அ","உ"],
+    correct: "அ"
+  },
+
+  {
+    q: "நன்றி என்பதன் ஆங்கிலப் பொருள் என்ன?",
+    a: ["Hello","Water","Thank you","Book"],
+    correct: "Thank you"
+  },
+
+  {
+    q: "தமிழில் மொத்த எழுத்துக்கள் எத்தனை?",
+    a: ["216","247","12","18"],
+    correct: "247"
+  }
+
+];
+
+let current = 0;
+let points = 0;
+let answered = false;
+
+function loadQuestion() {
+
+  answered = false;
+
+  const q = questions[current];
+
+  document.getElementById("question").textContent = q.q;
+
+  document.getElementById("feedback").textContent = "";
+
+  const area = document.getElementById("options");
+
+  area.innerHTML = "";
+
+  q.a.forEach(option => {
+
+    const btn = document.createElement("button");
+
+    btn.textContent = option;
+
+    btn.onclick = () => checkAnswer(option);
+
+    area.appendChild(btn);
+
+  });
+
+}
+
+function checkAnswer(answer) {
+
+  if (answered) return;
+
+  answered = true;
+
+  const correct = questions[current].correct;
+
+  if (answer === correct) {
+
+    points++;
+
+    document.getElementById("feedback").textContent =
+      "🎉 சரியான பதில்!";
+
+  } else {
+
+    document.getElementById("feedback").textContent =
+      "மீண்டும் முயற்சி செய்யுங்கள்! சரியான பதில்: " + correct;
+
+  }
+
+  document.getElementById("score").textContent =
+    "மதிப்பெண்: " + points + " / " + (current + 1);
+
+}
+
+function nextQuestion() {
+
+  if (current < questions.length - 1) {
+
+    current++;
+
+    loadQuestion();
+
+  } else {
+
+    document.getElementById("question").textContent =
+      "வாழ்த்துக்கள்! வினாடி வினா முடிந்தது!";
+
+    document.getElementById("options").innerHTML = "";
+
+    document.getElementById("feedback").textContent =
+      "உங்கள் இறுதி மதிப்பெண்: " + points + " / " + questions.length;
+
+    document.getElementById("score").textContent =
+      "தமிழைக் கற்போம்!";
+
+    current = -1;
+
+  }
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
