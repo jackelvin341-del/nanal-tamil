@@ -7,6 +7,8 @@
   content="kQV1rJF-4J7KbzjOvnARisCTv31mPfIFfXlOSHbGJAs" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/nanal-tamil/manifest.json">
+<meta name="theme-color" content="#087443">
 
   <meta name="description" content="தமிழின் பெருமை, வரலாறு, இலக்கியம் மற்றும் பண்பாட்டை உலகத்துடன் இணைக்கும் முயற்சி.">
 
@@ -1051,7 +1053,21 @@ async function loadDailyKural() {
 }
 
 loadDailyKural();
-
-  </script>
+    
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "/nanal-tamil/service-worker.js"
+    )
+    .then(() => {
+      console.log("Nanal Tamil PWA is ready!");
+    })
+    .catch((error) => {
+      console.error("PWA registration failed:", error);
+    });
+  });
+}
+  </script>  
 </body>
 </html>
