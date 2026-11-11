@@ -1,0 +1,26 @@
+
+{
+  "id": "/nanal-tamil/",
+  "name": "நானல் தமிழ் - Nanal Tamil",
+  "short_name": "Nanal Tamil",
+  "description": "தமிழ் மொழி, இலக்கியம், வரலாறு மற்றும் பண்பாட்டைக் கற்கும் தளம்.",
+  "start_url": "/nanal-tamil/",
+  "scope": "/nanal-tamil/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#087443",
+  "orientation": "portrait",
+  "lang": "ta",
+  "icons": [
+    {
+      "src": "/nanal-tamil/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/nanal-tamil/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
