@@ -327,6 +327,90 @@
 .academy-button:hover {
   transform: translateY(-3px);
 }
+
+
+/* NANAL TAMIL TRANSLATOR */
+
+.translator-section {
+  max-width: 900px;
+  margin: 55px auto;
+  padding: 35px 22px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid #e9e1d2;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(22,65,43,.10);
+}
+
+.translator-section h2 {
+  color: #104b32;
+  text-align: center;
+  font-size: 28px;
+}
+
+.translator-intro {
+  text-align: center;
+  color: #66756c;
+  margin: 10px 0 25px;
+}
+
+.translator-section label {
+  display: block;
+  color: #104b32;
+  font-weight: bold;
+  margin: 15px 0 8px;
+}
+
+.translator-section textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  border: 1px solid #d9dfd6;
+  border-radius: 12px;
+  font: inherit;
+  resize: vertical;
+}
+
+.translator-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.translator-actions button {
+  background: #176b45;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.translator-actions button:hover {
+  background: #104b32;
+}
+
+#translatorStatus {
+  text-align: center;
+  color: #176b45;
+  min-height: 25px;
+}
+
+.translator-note {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  .translator-section {
+    margin: 25px 12px;
+    padding: 22px 15px;
+  }
+}
+
   </style>
 </head>
 
@@ -352,6 +436,7 @@
       <a href="#projects">திட்டங்கள்</a>
       <a href="#join">இணையுங்கள்</a>
       <a href="#feedback">கருத்துகளைப் பகிருங்கள்</a>
+      <a href="#translator">மொழிபெயர்ப்பாளர்</a>
     </div>
 
   </nav>
@@ -664,6 +749,57 @@
         </div>
       </div>
     </section>
+
+    
+<!-- NANAL TAMIL ENGLISH TO TAMIL TRANSLATOR -->
+<section class="translator-section" id="translator">
+
+  <h2>🌐 ஆங்கிலம் → தமிழ் மொழிபெயர்ப்பாளர்</h2>
+
+  <p class="translator-intro">
+    ஆங்கிலச் சொற்கள் அல்லது வாக்கியங்களைத் தமிழில் மொழிபெயர்த்துப் பாருங்கள்.
+  </p>
+
+  <label for="englishInput">English Text</label>
+
+  <textarea id="englishInput"
+    maxlength="450"
+    placeholder="Type your English sentence here..."></textarea>
+
+  <div class="translator-actions">
+    <button type="button" onclick="translateEnglishToTamil()">
+      🌐 தமிழில் மொழிபெயர்
+    </button>
+
+    <button type="button" onclick="clearTranslator()">
+      Clear
+    </button>
+  </div>
+
+  <p id="translatorStatus" aria-live="polite"></p>
+
+  <label for="tamilOutput">தமிழ் மொழிபெயர்ப்பு</label>
+
+  <textarea id="tamilOutput"
+    readonly
+    placeholder="தமிழ் மொழிபெயர்ப்பு இங்கே தோன்றும்..."></textarea>
+
+  <div class="translator-actions">
+    <button type="button" onclick="copyTamil()">
+      📋 Copy Tamil
+    </button>
+
+    <button type="button" onclick="speakTamil()">
+      🔊 தமிழில் கேள்
+    </button>
+  </div>
+
+  <p class="translator-note">
+    Powered by an online translation service.
+  </p>
+
+</section>
+
 
     <section class="container soft" id="projects">
       <div class="section-head">
@@ -1068,6 +1204,112 @@ if ("serviceWorker" in navigator) {
     });
   });
 }
+
+// NANAL TAMIL TRANSLATOR
+
+async function translateEnglishToTamil() {
+
+  const input = document.getElementById("englishInput");
+  const output = document.getElementById("tamilOutput");
+  const status = document.getElementById("translatorStatus");
+
+  const text = input.value.trim();
+
+  if (!text) {
+    status.textContent = "Please enter English text!";
+    return;
+  }
+
+  status.textContent = "Translating...";
+  output.value = "";
+
+  try {
+
+    const url =
+      "https://api.mymemory.translated.net/get?q=" +
+      encodeURIComponent(text) +
+      "&langpair=en|ta";
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!response.ok ||
+        !data.responseData ||
+        data.responseStatus !== 200) {
+      throw new Error("Translation unavailable");
+    }
+
+    const decoder = document.createElement("textarea");
+    decoder.innerHTML = data.responseData.translatedText;
+
+    output.value = decoder.value;
+    status.textContent = "மொழிபெயர்ப்பு முடிந்தது!";
+
+  } catch (error) {
+
+    status.textContent =
+      "Translation failed. Please check your internet connection.";
+
+    console.error(error);
+  }
+}
+
+
+// CLEAR
+
+function clearTranslator() {
+
+  document.getElementById("englishInput").value = "";
+  document.getElementById("tamilOutput").value = "";
+  document.getElementById("translatorStatus").textContent = "";
+
+  window.speechSynthesis?.cancel();
+}
+
+
+// COPY
+
+async function copyTamil() {
+
+  const text = document.getElementById("tamilOutput").value;
+
+  if (!text) return;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById("translatorStatus").textContent =
+      "தமிழ் நகலெடுக்கப்பட்டது!";
+  } catch (error) {
+    document.getElementById("tamilOutput").select();
+    document.execCommand("copy");
+  }
+}
+
+
+// TAMIL VOICE
+
+function speakTamil() {
+
+  const text = document.getElementById("tamilOutput").value;
+
+  if (!text) return;
+
+  if (!("speechSynthesis" in window)) {
+    document.getElementById("translatorStatus").textContent =
+      "Speech is not supported in this browser.";
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const speech = new SpeechSynthesisUtterance(text);
+
+  speech.lang = "ta-IN";
+  speech.rate = 0.9;
+
+  window.speechSynthesis.speak(speech);
+}
+
   </script>  
 </body>
 </html>
